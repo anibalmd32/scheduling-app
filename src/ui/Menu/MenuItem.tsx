@@ -11,7 +11,7 @@ function MenuItem ({
 		<li>
 			<NavLink
 				to={path}
-				className='flex justify-start gap-4 items-center p-2 rounded-2xl hover:bg-blue-950 transition-all duration-300 text-xl font-semibold'
+				className='flex justify-start gap-4 items-center p-2 pl-4 rounded-2xl hover:bg-blue-950 transition-all duration-300 text-md'
 			>
 				<span className='hidden md:inline-block'>
 					{createElement(icon)}
