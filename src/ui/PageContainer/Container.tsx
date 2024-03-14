@@ -5,9 +5,9 @@ function PageContainer({ isOpen }: PageContainerProps) {
 	return (
 		<section
 			className={`
-				container mx-auto p-4 transition-all duration-300 max-w-full min-w-full
+				constainer p-4 transition-all duration-300 float-end 
+				${isOpen ? 'w-10/12' : 'w-full'}
 			`}
-			style={{ marginLeft: isOpen ? '14rem' : '0' }}
 		>
 			<Outlet />
 		</section>
