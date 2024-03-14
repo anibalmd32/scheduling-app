@@ -1,14 +1,14 @@
 import React from 'react';
 
-export interface RenderCel<T> {
+export interface RenderCell<T> {
 	column: string;
 	render: (cell: T) => React.ReactNode;
 }
 
-export type TableData<T> = RenderCel<T>[]
+export type TableCell<T> = RenderCell<T>[]
 
 export interface TableProps<T> {
 	data: T[];
-	tableData: TableData<T>;
+	cells: TableCell<T>;
 	caption?: string;
 }

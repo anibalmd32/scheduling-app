@@ -2,29 +2,29 @@ import { TableProps } from './types';
 
 function Table<T>({
 	data,
-	tableData,
+	cells,
 	caption
 }: TableProps<T>) {
 	return (
-		<div className="overflow-x-auto">
-			<table className="w-full divide-y divide-gray-200">
-				{ caption && <caption className="text-xl">{caption}</caption>}
-				<thead className="bg-gray-50">
+		<div className="overflow-x-auto bg-white shadow rounded-lg">
+			<table className="w-full divide-y divide-blue-200">
+				{ caption && <caption className="px-6 py-3 text-xl bg-blue-500 text-white">{caption}</caption>}
+				<thead className="bg-blue-900 text-white">
 					<tr>
-						{tableData.map((cell, i) => (
+						{cells.map((cell, i) => (
 							<th
 								key={i}
-								className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+								className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
 							>
 								{String(cell.column)}
 							</th>
 						))}
 					</tr>
 				</thead>
-				<tbody className="bg-white divide-y divide-gray-200">
+				<tbody className="divide-y divide-blue-200">
 					{data.map((row, i) => (
-						<tr key={i} className="hover:bg-gray-100">
-							{tableData.map((cell, j) => (
+						<tr key={i} className="hover:bg-blue-100">
+							{cells.map((cell, j) => (
 								<td key={j} className="px-6 py-4 whitespace-nowrap">
 									{cell.render(row)}
 								</td>
