@@ -1,5 +1,5 @@
-import { TabProps } from './types';
-import useTab from './useTab';
+import { TabProps } from './ui';
+import useTab from '../hooks/useTab';
 
 function Tabs({
 	items

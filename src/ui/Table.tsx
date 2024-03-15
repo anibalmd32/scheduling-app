@@ -1,4 +1,4 @@
-import { TableProps } from './types';
+import { TableProps } from './ui';
 
 function Table<T>({
 	data,

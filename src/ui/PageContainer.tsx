@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { PageContainerProps } from './types';
+import { PageContainerProps } from './ui';
 
 function PageContainer({ isOpen }: PageContainerProps) {
 	return (

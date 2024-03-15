@@ -1,4 +1,4 @@
-import { FormProps } from './types';
+import { FormProps } from './ui';
 
 function Form({ children, onSubmit }: FormProps) {
 	return (

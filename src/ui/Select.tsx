@@ -1,4 +1,4 @@
-import { SelectProps } from './types';
+import { SelectProps } from './ui';
 
 function Select({
 	items,

@@ -1,4 +1,4 @@
-import { ModalProps } from './types';
+import { ModalProps } from './ui';
 import { FaTimes } from 'react-icons/fa';
 
 function Modal({

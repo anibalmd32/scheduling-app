@@ -1,4 +1,4 @@
-import { InputProps } from './types';
+import { InputProps } from './ui';
 
 function Input({
 	label,

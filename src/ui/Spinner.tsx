@@ -1,4 +1,4 @@
-import { SpinnerProps } from './types';
+import { SpinnerProps } from './ui';
 
 function Spinner ({ size }: SpinnerProps) {
 	return (

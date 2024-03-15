@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { ButtonComponentProps } from './types';
-import colorConfig from '../../utilities/colorConfig';
+import { ButtonComponentProps } from './ui';
+import colorConfig from '../utilities/colorConfig';
 
 function Button ({
 	label,
