@@ -1,4 +1,4 @@
-import { MenuItemProps } from '../ui/ui';
+import { MenuItemProps } from '../components/ui';
 
 import { FaHome } from 'react-icons/fa';
 import { GrScheduleNew } from 'react-icons/gr';

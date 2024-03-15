@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Topbar from '../ui/Topbar';
-import Menu from '../ui/Menu';
+import Topbar from '../components/Topbar';
+import Menu from '../components/Menu';
 import navigation from '../utilities/navigation';
-import PageContainer from '../ui/PageContainer';
+import PageContainer from '../components/PageContainer';
 
 function Layout () {
 	const [isOpen, setIsOpen] = useState(false);
