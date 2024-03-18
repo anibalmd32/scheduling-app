@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import useStyleSatate from '../hooks/useStyleState';
 import { ButtonComponentProps } from './ui';
 import colorConfig from '../utilities/colorConfig';
 
@@ -8,11 +8,13 @@ function Button ({
 	type,
 	onClick,
 }: ButtonComponentProps) {
-	const [isHovered, setIsHoovered] = useState(false);
-	const [isPressed, setIsPressed] = useState(false);
 
-	const handleHover = () => setIsHoovered(!isHovered);
-	const handlePress = () => setIsPressed(!isPressed);
+	const {
+		handleHover,
+		handlePress,
+		isHovered,
+		isPressed
+	} = useStyleSatate();
 
 	return (
 		<button

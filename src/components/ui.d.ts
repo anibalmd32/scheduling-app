@@ -7,7 +7,7 @@ export interface ColorState {
 	hover: string
 }
 
-export type ComponentVariant = 'success' | 'error' | 'wraning' | 'info'
+export type ComponentVariant = 'success' | 'error' | 'warning' | 'info'
 
 export type ColorConfig = Record<ComponentVariant, ColorState>
 
@@ -103,5 +103,13 @@ export interface SelectProps {
 export interface FormProps {
 	onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 	children: React.ReactNode
+}
+
+// * TOASTER
+export interface ToastProps {
+	variant: ComponentVariant;
+	message: string;
+	duraction?: number;
+	isLoader?: boolean;
 }
 

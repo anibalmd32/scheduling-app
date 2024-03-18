@@ -1,4 +1,4 @@
-import { ColorConfig } from '../types';
+import { ColorConfig } from '../components/ui';
 
 const colorConfig: ColorConfig = {
 	error: {
@@ -13,7 +13,7 @@ const colorConfig: ColorConfig = {
 		default: 'rgb(16,185,129)',
 		hover: 'rgb(5,150,105)',
 	},
-	wraning: {
+	warning: {
 		default: 'rgb(251,146,60)',
 		hover: 'rgb(234,88,12)',
 	}
