@@ -6,6 +6,9 @@ interface API {
 	method: 'get' | 'post' | 'put' | 'delete';
 	params?: {
 		id?: string;
+		degree?: string;
+		semester?: string;
+		classroom?: string;
 	},
 	body?: unknown;
 }
@@ -29,7 +32,7 @@ class HTTPService {
 		});
 	}
 
-	async httpCaller<T>(props: API): Promise<AxiosResponse<T>> {
+	async httpCaller<T>(props: API): Promise<AxiosResponse<T[]>> {
 		const { endpoint, method, body, params } = props;
 		const instace = this.callerInstance();
 		const config: AxiosRequestConfig = {
@@ -40,7 +43,7 @@ class HTTPService {
 
 		this.requestInterceptor(instace);
 
-		const res = await instace(endpoint, config);
+		const res = await instace<T[]>(endpoint, config);
 
 		return res;
 	}

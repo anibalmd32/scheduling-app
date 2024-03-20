@@ -1,4 +1,5 @@
 import React, { FormEvent, ChangeEvent } from 'react';
+import { EventSourceInput } from '@fullcalendar/core';
 import { IconType } from 'react-icons';
 
 // * COLOR CONFIG
@@ -111,5 +112,11 @@ export interface ToastProps {
 	message: string;
 	duraction?: number;
 	isLoader?: boolean;
+}
+
+// * CALLENDAR
+export interface CallendarProps {
+	events: EventSourceInput;
+	onExport?: () => void;
 }
 
