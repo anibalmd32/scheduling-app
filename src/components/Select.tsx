@@ -10,7 +10,7 @@ function Select({
 	return (
 		<label
 			htmlFor={name}
-			className='flex flex-col gap-2'
+			className='flex flex-col gap-2 w-full mt-4'
 		>
 			<span className='block'>{label}</span>
 			<select

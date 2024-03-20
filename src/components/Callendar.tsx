@@ -1,6 +1,7 @@
 
 import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import Button from './Button';
 import { CallendarProps } from './ui';
 
 export default function Callendar({
@@ -9,7 +10,12 @@ export default function Callendar({
 }: CallendarProps) {
 	return (
 		<div>
-			<button onClick={onExport}>Exportar a PDF</button>
+			<Button
+				label='Exportar a PDF'
+				type='button'
+				variant='info'
+				onClick={onExport}
+			/>
 			<div id='myCalendar'>
 				<FullCalendar
 					plugins={[timeGridPlugin]}

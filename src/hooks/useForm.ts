@@ -11,7 +11,7 @@ function useForm<T>(defaultValues: T) {
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		console.log(formData);
+		return formData;
 	};
 
 	return {
