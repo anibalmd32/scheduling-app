@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import useQuery from './useQuery';
 
 function useTab() {
-	const [selectedTab, setSelectedTab] = useState<number>();
+	const [selectedTab, setSelectedTab] = useState<number>(0);
 	
 	const query = useQuery();
 	const tab = query.get('tab');
@@ -13,7 +13,7 @@ function useTab() {
 	};
 	
 	useEffect(() => {
-		const initialTab = tab ? Number(tab):  1;
+		const initialTab = tab ? Number(tab):  0;
 		setSelectedTab(initialTab);
 		window.history.replaceState(null, '', `?tab=${initialTab}`);
 	}, [tab]);

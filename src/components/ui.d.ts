@@ -42,7 +42,7 @@ export interface TableProps<T> {
 
 // * TABS
 export interface TabItem {
-	id: number;
+	index: number;
 	label: string;
 	view: React.ReactNode;
 }
@@ -82,7 +82,7 @@ export interface MenuProps {
 
 // * FORM
 export interface InputProps {
-	label: string;
+	label?: string;
 	placeholder: string;
 	type: 'text' | 'number';
 	value: string | number;
@@ -90,14 +90,16 @@ export interface InputProps {
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
+export interface SelectItem {
+	label: string;
+	value: number | string;
+}
+
 export interface SelectProps {
 	label: string;
 	name: string;
 	value: number | string;
-	items: {
-		label: string;
-		value: number | string;
-	}[] | undefined;
+	items: SelectItem[] | undefined;
 	onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 

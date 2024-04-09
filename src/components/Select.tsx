@@ -12,7 +12,7 @@ function Select({
 			htmlFor={name}
 			className='flex flex-col gap-2 w-full mt-4'
 		>
-			<span className='block'>{label}</span>
+			<span className='block font-semibold text-blue-950 text-xl'>{label}</span>
 			<select
 				name={name}
 				id={name}

@@ -23,7 +23,7 @@ function Table<T>({
 				</thead>
 				<tbody className="divide-y divide-blue-200">
 					{data.map((row, i) => (
-						<tr key={i} className="hover:bg-blue-100">
+						<tr key={i} className="hover:bg-blue-50 transition-colors duration-300">
 							{cells.map((cell, j) => (
 								<td key={j} className="px-6 py-4 whitespace-nowrap">
 									{cell.render(row)}

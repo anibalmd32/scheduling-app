@@ -5,8 +5,8 @@ function PageContainer({ isOpen }: PageContainerProps) {
 	return (
 		<section
 			className={`
-				constainer p-4 transition-all duration-300 float-end 
-				${isOpen ? 'w-10/12' : 'w-full'}
+				constainer p-4 transition-all duration-300 float-end mt-12 md:mt-10 
+				${isOpen ? 'md:w-10/12' : 'w-full'}
 			`}
 		>
 			<Outlet />

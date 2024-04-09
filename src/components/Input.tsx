@@ -13,9 +13,11 @@ function Input({
 			htmlFor={name}
 			className='flex flex-col gap-2'
 		>
-			<span className='block'>
-				{label}
-			</span>
+			{label && (
+				<span className='block font-semibold'>
+					{label}
+				</span>
+			)}
 			<input
 				type={type}
 				placeholder={placeholder}

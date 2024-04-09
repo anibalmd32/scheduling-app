@@ -2,7 +2,7 @@ import { useState } from 'react';
 import HTTPService from '../../../http.service';
 import { ScheduleParams, ScheduleEvent } from '../def';
 
-const service = new HTTPService();
+const service = new HTTPService('schedules');
 
 function useSchedule() {
 	const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
@@ -16,7 +16,7 @@ function useSchedule() {
 	}: ScheduleParams) => {
 		try {
 			const { data } = await service.httpCaller<ScheduleEvent>({
-				endpoint: '/schedules/has-events',
+				endpoint: '/has-events',
 				method: 'get',
 				params: {
 					degree,

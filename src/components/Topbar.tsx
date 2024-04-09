@@ -8,7 +8,7 @@ function Topbar ({
 }: TopbarProps) {
 	return (
 		<div className={`
-			bg-blue-900 w-full p-4 sticky top-0 left-0 text-blue-50 z-50
+			bg-blue-900 w-full p-4 fixed top-0 left-0 text-blue-50 z-50
 		`}>
 			<button
 				onClick={handleOpen}

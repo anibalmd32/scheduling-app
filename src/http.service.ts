@@ -1,22 +1,26 @@
-import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
-const API_URL = 'http://localhost:8080/api';
+// * AXIOS IMPORTS 
+import axios, {
+	AxiosInstance,
+	AxiosResponse,
+	AxiosRequestConfig
+} from 'axios';
 
-interface API {
-	endpoint: string;
-	method: 'get' | 'post' | 'put' | 'delete';
-	params?: {
-		id?: string;
-		degree?: string;
-		semester?: string;
-		classroom?: string;
-	},
-	body?: unknown;
-}
+// * CONSTANTS
+import { API_URL } from './constanst';
+
+// * DEFINITTIONS
+import { RequestConfig, AppModule } from './def';
 
 class HTTPService {
+	private module: AppModule;
+
+	constructor(module: AppModule) {
+		this.module = module;
+	}
+
 	private callerInstance() {
 		const axiosInstance: AxiosInstance = axios.create({
-			baseURL: API_URL
+			baseURL: `${API_URL}/${this.module}`
 		});
 
 		return axiosInstance;
@@ -32,7 +36,7 @@ class HTTPService {
 		});
 	}
 
-	async httpCaller<T>(props: API): Promise<AxiosResponse<T[]>> {
+	async httpCaller<T>(props: RequestConfig): Promise<AxiosResponse<T[]>> {
 		const { endpoint, method, body, params } = props;
 		const instace = this.callerInstance();
 		const config: AxiosRequestConfig = {

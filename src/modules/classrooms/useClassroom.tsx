@@ -2,7 +2,7 @@ import { ReactNode, createContext, useContext, useEffect, useState } from 'react
 import HTTPService from '../../http.service';
 import { IClassroomContext, Classroom } from './def';
 
-const service = new HTTPService();
+const service = new HTTPService('classrooms');
 
 const ClassroomContext = createContext<IClassroomContext>({} as IClassroomContext);
 
@@ -17,7 +17,7 @@ export function ClassroomProvider({
 	const getClassroomsData = async () => {		
 		try {
 			const { data } = await service.httpCaller<Classroom>({
-				endpoint: '/classrooms',
+				endpoint: '/',
 				method: 'get'
 			});
 

@@ -43,8 +43,8 @@ function Toast({
 			className={`
 				${isVisible ? 'flex' : 'hidden'}
 				items-center p-2 rounded-md shadow-md text-gray-100 px-4
-				absolute bottom-2 right-2 z-50 text-xl justify-between 
-				min-w-[300px] min-h-[64px]
+				fixed bottom-2 right-2 z-50 text-sm justify-between 
+				min-w-[300px] min-h-[64px] cursor-pointer
 			`}
 			style={{
 				backgroundColor: colorConfig[variant].hover
