@@ -15,7 +15,7 @@ class HTTPService {
 	private module: AppModule;
 
 	constructor(module: AppModule) {
-		this.module = module;
+		this.module = module; 
 	}
 
 	private callerInstance() {
