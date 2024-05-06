@@ -16,11 +16,12 @@ export interface RequestConfig {
 }
 
 export type AppModule = 
-'classrooms' |
-'days' |
-'professors' |
-'schedules' |
-'semesters'
+| 'classrooms'
+| 'days'
+| 'professors'
+| 'schedules'
+| 'semesters'
+| 'degrees'
 
 export interface DataHookProps {
 	module: AppModule;

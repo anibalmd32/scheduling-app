@@ -1,7 +1,6 @@
 import semesterEndpoints from '../utils/api-endpints';
 import { DeleteParams } from '../def';
 
-
 async function handleDeleteSubject({
 	handleError,
 	handleLoading,

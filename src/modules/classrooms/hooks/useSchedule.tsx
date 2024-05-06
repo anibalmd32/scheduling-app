@@ -16,12 +16,10 @@ function useSchedule() {
 	}: ScheduleParams) => {
 		try {
 			const { data } = await service.httpCaller<ScheduleEvent>({
-				endpoint: '/has-events',
+				endpoint: '/as-events',
 				method: 'get',
 				params: {
-					degree,
-					semester,
-					classroom
+					classroom: 'aula 12'
 				}
 			});
 

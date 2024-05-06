@@ -11,6 +11,11 @@ export interface Classroom {
 	occupied: DaySchema[] | [];
 }
 
+// Interface temporarl
+export interface ClassroomData extends Classroom {
+	_id: string
+}
+
 export interface IClassroomContext {
 	classroomsData: Classroom[];
 	isLoading: boolean;
@@ -23,6 +28,7 @@ export interface ScheduleParams {
 }
 
 export interface ScheduleEvent {
+	id: string
 	title: string
 	start: string
 	end: string

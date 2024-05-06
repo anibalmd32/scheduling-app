@@ -36,7 +36,7 @@ class HTTPService {
 		});
 	}
 
-	async httpCaller<T>(props: RequestConfig): Promise<AxiosResponse<T[]>> {
+	async httpCaller<T>(props: RequestConfig): Promise<AxiosResponse<T>> {
 		const { endpoint, method, body, params } = props;
 		const instace = this.callerInstance();
 		const config: AxiosRequestConfig = {
@@ -47,7 +47,7 @@ class HTTPService {
 
 		this.requestInterceptor(instace);
 
-		const res = await instace<T[]>(endpoint, config);
+		const res = await instace<T>(endpoint, config);
 
 		return res;
 	}

@@ -1,5 +1,12 @@
 import React, { FormEvent, ChangeEvent } from 'react';
-import { EventSourceInput } from '@fullcalendar/core';
+import {
+	EventAddArg,
+	DateSelectArg,
+	EventSourceInput,
+	EventClickArg,
+	EventRemoveArg,
+	EventChangeArg,
+} from '@fullcalendar/core';
 import { IconType } from 'react-icons';
 
 // * COLOR CONFIG
@@ -103,6 +110,8 @@ export interface SelectProps {
 	onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
+export type MapSelectItems<T> = (items: T[]) => SelectItem[];
+
 export interface FormProps {
 	onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 	children: React.ReactNode
@@ -120,5 +129,10 @@ export interface ToastProps {
 export interface CallendarProps {
 	events: EventSourceInput;
 	onExport?: () => void;
+	handleInputEvent: (args: DateSelectArg) => void;
+	handleClickEvent: (args: EventClickArg) => void;
+	handleChangeEvent: (args: EventChangeArg) => void;
+	onAddEvent: (args: EventAddArg) => void;
+	onDeletEvent: (args: EventRemoveArg) => void;
 }
 

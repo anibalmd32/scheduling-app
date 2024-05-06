@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import useQuery from './useQuery';
 
 function useTab() {
-	const [selectedTab, setSelectedTab] = useState<number>(0);
+	const [selectedTab, setSelectedTab] = useState<number>();
 	
 	const query = useQuery();
 	const tab = query.get('tab');

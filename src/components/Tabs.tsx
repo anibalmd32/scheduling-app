@@ -6,7 +6,6 @@ function Tabs({
 }: TabProps) {
 
 	const { handleSelectTab, selectedTab } = useTab();
-
 	return (
 		<div className='flex flex-col items-start justify-between py-3 md:py-6'>
 			<div className='flex gap-2 flex-wrap'>
@@ -23,7 +22,7 @@ function Tabs({
 
 			<div className='mt-6 md:mt-0 w-full'>
 				{
-					items[selectedTab].index === selectedTab &&
+					items[selectedTab ?? 0].index === selectedTab &&
 					items[selectedTab].view
 				}
 			</div>

@@ -1,8 +1,13 @@
+// * COMPONENTS
+import ScheduleOptions from './components/ScheduleOptions';
+
 function Schedules() {
 	return (
-		<div>
-			<h1>Horarios de clase</h1>
-		</div>
+		<section className="mt-8">
+			<h1 className='text-3xl text-blue-950 font-bold'>Horarios de clase</h1>
+
+			<ScheduleOptions />
+		</section>
 	);
 }
 

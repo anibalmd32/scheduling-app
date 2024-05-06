@@ -16,7 +16,8 @@ export const SemestersContext = createContext<SemestersCtx>({} as SemestersCtx);
 function SemestersProvider({ children }: { children: ReactNode }) {
 	const [semestersTabItems, setSemesterTabItems] = useState<TabItem[]>([]);
 	const [sectionId, setSectionId] = useState<string>('');
-	const { data: semesters, isLoading, loadData } = useData<SemesterData>({
+
+	const { data: semesters, isLoading, loadData } = useData<SemesterData[]>({
 		module: 'semesters',
 		requestConfig: {
 			endpoint: '/all',
@@ -25,17 +26,21 @@ function SemestersProvider({ children }: { children: ReactNode }) {
 	});
 
 	useEffect(() => {
-		setSemesterTabItems(semesters.map((semester, index) => ({
-			index,
-			label: `Semestre ${semester.number}`,
-			view: <SectionsView sections={semester.sections} />
-		})));
+		isLoading && loadData();
+		
+		if (semesters) {
+			setSemesterTabItems(semesters.map((semester, index) => ({
+				index,
+				label: `Semestre ${semester.number}`,
+				view: <SectionsView sections={semester.sections} />
+			})));
+		}
 	}, [semesters, isLoading]);
 
 	return (
 		<SemestersContext.Provider value={{
 			isLoading,
-			semesters,
+			semesters: semesters || [],
 			semestersTabItems,
 			loadData,
 			sectionId,

@@ -1,24 +1,35 @@
-
 import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import Button from './Button';
+import interactionPlugin from '@fullcalendar/interaction';
+// import Button from './Button';
 import { CallendarProps } from './ui';
 
 export default function Callendar({
 	events,
-	onExport
+	handleInputEvent,
+	handleClickEvent,
+	handleChangeEvent,
+	onAddEvent,
+	onDeletEvent,
+	// onExport,
 }: CallendarProps) {
 	return (
 		<div>
-			<Button
+			{/* <Button
 				label='Exportar a PDF'
 				type='button'
 				variant='info'
 				onClick={onExport}
-			/>
+			/> */}
 			<div id='myCalendar'>
 				<FullCalendar
-					plugins={[timeGridPlugin]}
+					plugins={[timeGridPlugin, interactionPlugin]}
+					selectable
+					select={handleInputEvent}
+					eventClick={handleClickEvent}
+					eventChange={handleChangeEvent}
+					eventAdd={onAddEvent}
+					eventRemove={onDeletEvent}
 					initialView="timeGridWeek"
 					nowIndicator={false}
 					locale={'es'}
