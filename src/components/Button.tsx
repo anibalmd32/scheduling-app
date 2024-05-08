@@ -6,6 +6,7 @@ function Button ({
 	label,
 	variant,
 	type,
+	disabled,
 	onClick,
 }: ButtonComponentProps) {
 
@@ -20,6 +21,7 @@ function Button ({
 		<button
 			onClick={onClick}
 			type={type}
+			disabled={disabled}
 			className={`
 				w-fit rounded-lg transition-colors duration-300 p-2 shadow-gray-400 shadow-sm text-gray-200 hover:text-gray-100 font-semibold
 				${isPressed && 'shadow-inner'}

@@ -1,7 +1,6 @@
-import type { ScheduleParam } from '../schedules.d';
 import * as apiEndpintLib from '../libs/endpoint-lib';
 
-const endpointIndex: Record<ScheduleParam, string> = {
+const endpointIndex: Record<string, string> = {
 	'semesters': apiEndpintLib.getSemesterList(),
 	'classrooms': apiEndpintLib.getClassroomList(),
 };

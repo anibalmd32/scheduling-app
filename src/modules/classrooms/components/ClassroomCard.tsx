@@ -3,14 +3,13 @@ import { Classroom,  } from '../def';
 import { AiTwotoneSchedule } from 'react-icons/ai';
 
 import Modal from '../../../components/Modal';
-import Callendar from '../../../components/Callendar';
 
 function ClassroomCard({
 	category,
 	code,
 	degrees,
 }: Classroom) {
-	const { handleOpenModal, isOpenModal, getSchedule, events } = useSchedule();
+	const { handleOpenModal, isOpenModal } = useSchedule();
 
 	return (
 		<article className="border-2 border-blue-500 rounded-lg shadow-lg overflow-hidden md:min-w-40 mb-8 md:mb-0 pb-4">
@@ -30,20 +29,13 @@ function ClassroomCard({
 				<button
 					className='text-2xl text-blue-600 hover:scale-110 transition-transform duration-300'
 					title='Generar horario'
-					onClick={async () => {
-						await getSchedule({
-							degree: 'sistemas',
-							semester: '1',
-							classroom: code
-						});
-					}}
 				>
 					<AiTwotoneSchedule />
 				</button>
 			</div>
 
 			<Modal open={isOpenModal} onClose={handleOpenModal} >
-				<Callendar events={events} />
+				<p>Modal</p>
 			</Modal>
 		</article>
 	);

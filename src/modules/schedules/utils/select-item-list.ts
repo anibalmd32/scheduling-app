@@ -1,12 +1,11 @@
-import type { SelectItemsIndex } from '../schedules.d';
 import * as selectItemsLib from '../libs/maped-select-items-lib';
 
-export const mapedSelectItems: SelectItemsIndex = {
+export const mapedSelectItems = {
 	'semesters': selectItemsLib.mapSemesterItems,
 	'classrooms': selectItemsLib.mapClassroomItems,
 };
 
-export const mapedModalSelectItems: SelectItemsIndex = {
+export const mapedModalSelectItems = {
 	'classrooms': selectItemsLib.mapTypeClassroomItems,
 	'semesters': selectItemsLib.mapSemesterItems
 };

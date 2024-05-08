@@ -24,6 +24,7 @@ export interface ButtonComponentProps {
 	label: string;
 	variant: ComponentVariant;
 	type: 'button' | 'submit' | 'reset'
+	disabled?: boolean;
 	onClick?: () => void;
 }
 

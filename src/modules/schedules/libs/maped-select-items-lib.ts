@@ -1,6 +1,6 @@
 import type { ClassroomData } from '../../classrooms/def';
 import type { SemesterData, SubjectData } from '../../semesters/def';
-import type { MapSelectScheduleItems } from '../schedules.d';
+import type { MapSelectScheduleItems } from '../def';
 
 export const mapTypeClassroomItems: MapSelectScheduleItems = (items) => {
 	const classrooms = items as ClassroomData[];

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AxiosError } from 'axios';
 import HTTPService from '../http.service';
 import { DataHookProps } from '../def';
@@ -19,6 +19,7 @@ function useData<T>({
 			setData(res.data);
 		} catch (err) {
 			if (err instanceof AxiosError) {
+				// TODO: mostrar alerta con el error
 				console.log(err);
 				setError(err);
 			}
@@ -26,6 +27,10 @@ function useData<T>({
 			setIsLoading(false);
 		}
 	};
+
+	useEffect(() => {
+		loadData();
+	}, []);
 
 	return {
 		data,
