@@ -66,6 +66,8 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 		forAdd: false,
 		forDetails: false
 	});
+	const [selectedSubject, setSelectedSubject] = React.useState<string>();
+	const [argsFormDelete, setArgsFormDelete] = React.useState<EventClickArg>();
 
 	// * FORM HOOK
 	const { handleSubmit, handleChange, formData, resetForm } = useForm<AddToClassroomValues>(formValues);
@@ -141,8 +143,10 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 	};
 
 	const handleClickSubject = (args: EventClickArg) => {
-		args.event.remove();
-		// TODO: abrir modal con la info de la mateia y con la accion de elimnar
+		const subjectId = args.event.id;
+		setSelectedSubject(subjectId);
+		setArgsFormDelete(args);
+		setOpenModal({ ...openModal, forDetails: !openModal.forDetails });
 	};
 
 	const handleChangeSubject = async (args: EventChangeArg) => {
@@ -286,7 +290,9 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 			semesterItems,
 			subjectItems,
 			handleSelectSemester,
-			onSubmit
+			onSubmit,
+			selectedSubject,
+			argsFormDelete
 		}}>
 			{children}
 		</ClassroomScheduleContext.Provider>

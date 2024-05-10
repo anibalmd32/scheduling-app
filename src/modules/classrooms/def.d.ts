@@ -32,5 +32,10 @@ export interface ScheduleEvent {
 	title: string
 	start: string
 	end: string
+	metadata: Array<{
+		key: string
+		value: string
+	}>
+	type: string
 }
   

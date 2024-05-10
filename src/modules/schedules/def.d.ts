@@ -78,6 +78,8 @@ export interface ClassroomScheduleCtx {
   subjectItems: SelectItem[]
   handleSelectSemester: (semesterId: string) => void
   onSubmit: (formData: AddToClassroomValues) => Promise<void>
+  selectedSubject: string | undefined
+  argsFormDelete: EventClickArg | undefined
 }
 
 // * LIBS

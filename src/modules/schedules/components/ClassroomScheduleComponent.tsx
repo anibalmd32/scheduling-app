@@ -6,6 +6,7 @@ import Callendar from '../../../components/Callendar';
 import Select from '../../../components/Select';
 import Spinner from '../../../components/Spinner';
 import { ScheduleForm } from './SchduleForm';
+import { ScheduleDetails } from './ScheduleDetails';
 
 export const ClassroomScheduleComponent = () => {
 	const {
@@ -29,6 +30,7 @@ export const ClassroomScheduleComponent = () => {
 	
 	return (
 		<>
+			<ScheduleDetails />
 			<Select
 				items={classroomSelectItems}
 				label="Lista de salones"

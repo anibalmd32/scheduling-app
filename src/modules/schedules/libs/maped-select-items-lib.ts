@@ -19,7 +19,7 @@ export const mapClassroomItems: MapSelectScheduleItems = (items) => {
 	const classrooms = items as ClassroomData[];
 
 	return classrooms.map(classroom => ({
-		label: classroom.code,
+		label: `${classroom.code} - ${classroom.category}`,
 		value: classroom._id
 	}));
 };
