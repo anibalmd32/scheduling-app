@@ -19,7 +19,6 @@ import type { ScheduleEvent } from '../../classrooms/def';
 import type {
 	EventAddArg,
 	DateSelectArg,
-	EventInput,
 	EventClickArg,
 	EventRemoveArg,
 	EventChangeArg
@@ -69,7 +68,6 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 	const [selectedSubject, setSelectedSubject] = React.useState<string>();
 
 	// * STATES FOR CALLENDAR COMPONENT
-	const [selectArgs, setSelectArgs] = React.useState<DateSelectArg>();
 	const [argsFormDelete, setArgsFormDelete] = React.useState<EventClickArg>();
 
 	// * FORM HOOK
@@ -134,8 +132,6 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 			end,
 			day,
 		});
-
-		setSelectArgs(args);
 	};
 
 	const handleClickSubject = (args: EventClickArg) => {
@@ -229,20 +225,6 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 				try {
 					const schedule = await createScheduleFromClassroom(newSchedule);
 					setClassroomScheduleEvents([...classroomSchduleEvents, schedule]);
-
-					const args = selectArgs;
-
-					if (args) {
-						const componentAPI = args.view.calendar;
-						const newSubject: EventInput = {
-							title: '',
-							start: args.startStr,
-							end: args.endStr
-						};
-		
-						componentAPI.addEvent(newSubject);
-					}
-	
 					setOpenModal({ ...openModal, forAdd: false });
 					resetForm();
 					setSubjectItems([]);
