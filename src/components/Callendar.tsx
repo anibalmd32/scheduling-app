@@ -23,6 +23,7 @@ export default function Callendar({
 			/> */}
 			<div id='myCalendar'>
 				<FullCalendar
+					eventOverlap={false}
 					plugins={[timeGridPlugin, interactionPlugin]}
 					selectable
 					select={handleInputEvent}
