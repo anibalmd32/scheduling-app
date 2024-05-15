@@ -9,6 +9,8 @@ import * as mapSelectItems from '../libs/maped-select-items-lib';
 
 // * UTILS
 import { formatSchedule } from '../utils/formatSchedule';
+import { hourDiff } from '../utils/hourDiff';
+import { typeSubjectArray } from '../utils/typeSubjectItems';
 
 // * DEFINITIONS
 import type { ClassroomScheduleCtx, AddToClassroomValues, NewScheduleEventData } from '../def';
@@ -46,6 +48,7 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 	// * STATES FOR FORM COMPOENT
 	const [semesterItems, setSemesterItems] = React.useState<SelectItem[]>([]);
 	const [subjectItems, setSubjectItems] = React.useState<SelectItem[]>([]);
+	const [typeSubjectItems] = React.useState<SelectItem[]>(typeSubjectArray);
 	const [newEventData, setNewEventData] = React.useState<NewScheduleEventData>({
 		start: '',
 		end: '',
@@ -54,9 +57,11 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 		subject: '',
 		typeClassroom: '',
 		day: '',
-		hourInterval: 0
+		typeSubject: '',
+		hours: 0
 	});
 	const [formValues,] = React.useState<AddToClassroomValues>({
+		type: '',
 		semester: '',
 		subject: ''
 	});
@@ -126,11 +131,14 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 			end: args.endStr
 		});
 
+		const hours = hourDiff(start, end);
+
 		setNewEventData({
 			...newEventData,
 			start,
 			end,
 			day,
+			hours
 		});
 	};
 
@@ -195,20 +203,6 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 			const subjects = semester?.sections[0].subjects;
 			const foundSubject = subjects?.find(subject => subject._id === formData.subject);
 
-			let subjectHours: number | undefined;
-
-			if (classroomType === 'laboratory') {
-				subjectHours = foundSubject?.laboratoryHours;
-			} else if (classroomType === 'normal') {
-				subjectHours = foundSubject?.theoryHours;
-			} else if (classroomType === 'pc') {
-				subjectHours = foundSubject?.practiceHours;
-			}
-
-			if (subjectHours === 0) {
-				throw new Error('Esta materia no puede ver horas en este salon');
-			}
-
 			if (foundSubject && classroomType && semester) {
 				
 				const newSchedule: NewScheduleEventData = {
@@ -219,7 +213,8 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 					start: newEventData.start,
 					end: newEventData.end,
 					day: newEventData.day,
-					hourInterval: subjectHours
+					typeSubject: formData.type,
+					hours: newEventData.hours
 				};
 
 				try {
@@ -281,6 +276,7 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 			// * For form componet
 			semesterItems,
 			subjectItems,
+			typeSubjectItems,
 			handleSelectSemester,
 			onSubmit,
 			selectedSubject,

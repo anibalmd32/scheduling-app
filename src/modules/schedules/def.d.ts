@@ -32,7 +32,8 @@ export interface NewScheduleEventData {
   subject: string
   typeClassroom: string
   day: string
-  hourInterval
+  hours: number
+  typeSubject: string
 }
 
 export interface UpdateSchedule {
@@ -76,6 +77,7 @@ export interface ClassroomScheduleCtx {
   // * For form componet
   semesterItems: SelectItem[]
   subjectItems: SelectItem[]
+  typeSubjectItems: SelectItem[]
   handleSelectSemester: (semesterId: string) => void
   onSubmit: (formData: AddToClassroomValues) => Promise<void>
   selectedSubject: string | undefined
@@ -92,6 +94,7 @@ type SelectItemsIndex = Record<ScheduleParam, MapSelectScheduleItems>;
 
 // * FORM VALUES
 export interface AddToClassroomValues {
+  type: string;
   semester: string; 
   subject: string;
 }

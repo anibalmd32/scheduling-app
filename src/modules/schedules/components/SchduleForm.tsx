@@ -16,6 +16,7 @@ export const ScheduleForm = ({ open, toggle }: Props) => {
 	const {
 		semesterItems,
 		subjectItems,
+		typeSubjectItems,
 		handleSelectSemester,
 		onSubmit,
 		handleChange,
@@ -29,6 +30,13 @@ export const ScheduleForm = ({ open, toggle }: Props) => {
 			onClose={toggle}
 		>
 			<Form onSubmit={(e) => onSubmit(handleSubmit(e))}>
+				<Select
+					items={typeSubjectItems}
+					label='Seleccione un tipo de materia'
+					name='type'
+					onChange={handleChange}
+					value={formData.type}
+				/>
 				<Select
 					items={semesterItems}
 					label='Seleccione un semestre'
