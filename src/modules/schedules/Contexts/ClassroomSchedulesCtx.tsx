@@ -55,6 +55,7 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 		clarrooom: '',
 		semester: undefined,
 		subject: '',
+		subjectId: '',
 		typeClassroom: '',
 		day: '',
 		typeSubject: '',
@@ -154,11 +155,16 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 			start: args.event.startStr,
 			end: args.event.endStr
 		});
+		const currentEvent = classroomSchduleEvents?.find(event => event.id === args.event.id);
+		const hours = hourDiff(start, end);
 
 		const dataToSend = {
 			day,
 			end,
 			start,
+			subject: currentEvent?.title,
+			typeSubject: currentEvent?.type,
+			hours
 		};
 
 		try {
@@ -195,6 +201,7 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 	};
 
 	const onSubmit = async (formData: AddToClassroomValues) => {
+		console.log(formData);
 		if (semesterData && formData.semester) {
 			const semester = semesterData.find(semester => semester._id === formData.semester);
 			const classroom = classroomData?.find(classroom => classroom._id === classroomSelectValue);
@@ -208,6 +215,7 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 				const newSchedule: NewScheduleEventData = {
 					clarrooom: classroom.code,
 					subject: foundSubject.name,
+					subjectId: foundSubject._id,
 					typeClassroom: classroomType,
 					semester: semester.number,
 					start: newEventData.start,

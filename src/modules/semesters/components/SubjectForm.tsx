@@ -25,7 +25,10 @@ function SubjectForm({
 	} = useForm<SubjectData>(defaultValues);
 
 	return (
-		<Modal onClose={onCloseModal} open={openForm}>
+		<Modal onClose={() => {
+			onCloseModal();
+			resetForm();
+		}} open={openForm}>
 			<Form onSubmit={(e) => onSubmit(handleSubmit(e))}>
 				<Input
 					name='name'
@@ -35,7 +38,7 @@ function SubjectForm({
 					value={formData.name}
 					label='Nombre'
 				/>
-				<Input
+				{/* <Input
 					name='theoryHours'
 					onChange={handleChange}
 					placeholder=''
@@ -58,7 +61,7 @@ function SubjectForm({
 					type='number'
 					value={formData.laboratoryHours}
 					label='Horas de Laboratorio'
-				/>
+				/> */}
 
 				<div className='flex gap-4 mt-4'>
 					<Button

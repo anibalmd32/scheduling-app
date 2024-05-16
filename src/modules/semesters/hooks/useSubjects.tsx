@@ -35,7 +35,6 @@ function useSubjects() {
 
 	const { loadData, sectionId } = useSemesters();
 
-	const handleOpenForm = () => setOpenForm(!openForm);
 	const handleResetForm = () => setDefaultValues({
 		_id: '',
 		laboratoryHours: 0,
@@ -43,6 +42,10 @@ function useSubjects() {
 		practiceHours: 0,
 		theoryHours: 0
 	});
+	const handleOpenForm = () => {
+		setOpenForm(!openForm);
+		handleResetForm();
+	};
 	const handleLoading = () => setShowToast({
 		...showToast,
 		loading: true,

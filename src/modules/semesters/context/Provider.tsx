@@ -20,7 +20,7 @@ function SemestersProvider({ children }: { children: ReactNode }) {
 	const { data: semesters, isLoading, loadData } = useData<SemesterData[]>({
 		module: 'semesters',
 		requestConfig: {
-			endpoint: '/all',
+			endpoint: '/',
 			method: 'get'
 		}
 	});

@@ -30,6 +30,7 @@ export interface NewScheduleEventData {
   clarrooom: string
   semester: number | undefined
   subject: string
+  subjectId: string
   typeClassroom: string
   day: string
   hours: number
