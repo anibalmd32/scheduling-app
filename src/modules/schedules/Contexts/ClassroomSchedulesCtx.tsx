@@ -142,7 +142,6 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 			hours
 		});
 	};
-
 	const handleClickSubject = (args: EventClickArg) => {
 		const subjectId = args.event.id;
 		setSelectedSubject(subjectId);
@@ -180,8 +179,19 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 	};
 
 	const onDeleteSubject = async (args: EventRemoveArg) => {
+		const currentEvent = classroomSchduleEvents?.find(event => event.id === args.event.id);
+
+		if (!currentEvent) {
+			return;
+		}
+
+		const dataToSend = {
+			subject: currentEvent?.title,
+			typeSubject: currentEvent?.type
+		};
+
 		try {
-			await deleteSchedule(args.event.id);
+			await deleteSchedule(args.event.id, dataToSend);
 			setClassroomScheduleEvents(classroomSchduleEvents.filter(event => event.id !== args.event.id));
 		} catch (error) {
 			console.error('Ocurrio un error al eliminar el horario', error);

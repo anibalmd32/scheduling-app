@@ -1,7 +1,7 @@
 import HTTPService from '../../../http.service';
 import type { ScheduleEvent } from '../../classrooms/def';
 import * as enpointLib from '../libs/endpoint-lib';
-import type { NewScheduleEventData, UpdateSchedule } from '../def';
+import type { NewScheduleEventData, UpdateSchedule, DeleteSchedule } from '../def';
 
 const service = new HTTPService('schedules');
 
@@ -37,9 +37,10 @@ export const updateSchedule = async (scheduleID: string, data: UpdateSchedule): 
 	return schedule;
 };
 
-export const deleteSchedule = async (scheduleID: string): Promise<void> => {
+export const deleteSchedule = async (scheduleID: string, data: DeleteSchedule): Promise<void> => {
 	await service.httpCaller({
 		endpoint: enpointLib.delteSchedule(scheduleID),
 		method: 'delete',
+		body: data
 	});
 };

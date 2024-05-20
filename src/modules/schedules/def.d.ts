@@ -43,6 +43,11 @@ export interface UpdateSchedule {
   end: string
 }
 
+export interface DeleteSchedule {
+  subject: string
+  typeSubject: string
+}
+
 export type ScheduleParam = 'semester' | 'classroom'
 
 export interface ScheduleQuery {
