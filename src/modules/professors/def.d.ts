@@ -13,7 +13,7 @@ export interface Professors {
 	_id: string;
 	data: ProfessorData;
 	conditions: string;
-	schedules: ScheduleEvent[];
+	schedule: ScheduleEvent[];
 }
 
 export interface ProfessorFormValues extends Pick<ProfessorData, 'firstName' | 'lastName' | 'dni' | 'email' | 'phone'> {}

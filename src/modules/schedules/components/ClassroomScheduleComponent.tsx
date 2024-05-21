@@ -46,6 +46,8 @@ export const ClassroomScheduleComponent = () => {
 				handleInputEvent={handleInputSubject}
 				onAddEvent={onAddSubject}
 				onDeletEvent={onDeleteSubject}
+				selectable
+				interactive
 			/>
 
 			<ScheduleForm

@@ -14,7 +14,7 @@ import Button from '../../../components/Button';
 
 // * ICONS
 import {FaPlusSquare } from 'react-icons/fa';
-import Input from '../../../components/Input';
+// import Input from '../../../components/Input';
 
 function SectionsView({
 	sections,
@@ -66,13 +66,13 @@ function SectionsView({
 						type='button'
 						variant='info'
 					/>
-					<Input
+					{/* <Input
 						name='subject'
 						onChange={() => {}}
 						placeholder='Buscar materia'
 						type='text'
 						value={''}
-					/>
+					/> */}
 				</div>
 
 				<Table

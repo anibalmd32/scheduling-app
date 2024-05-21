@@ -135,5 +135,7 @@ export interface CallendarProps {
 	handleChangeEvent: (args: EventChangeArg) => void;
 	onAddEvent: (args: EventAddArg) => void;
 	onDeletEvent: (args: EventRemoveArg) => void;
+	interactive?: boolean;
+	selectable?: boolean;
 }
 

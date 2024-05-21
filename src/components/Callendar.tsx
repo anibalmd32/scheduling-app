@@ -1,5 +1,5 @@
 import FullCalendar from '@fullcalendar/react';
-import timeGridPlugin from '@fullcalendar/resource-timegrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 // import Button from './Button';
 import { CallendarProps } from './ui';
@@ -11,8 +11,17 @@ export default function Callendar({
 	handleChangeEvent,
 	onAddEvent,
 	onDeletEvent,
+	interactive,
+	selectable,
 	// onExport,
 }: CallendarProps) {
+	
+	// Condicionalmente incluir interactionPlugin
+	const plugins = [timeGridPlugin];
+	if (interactive) {
+		plugins.push(interactionPlugin);
+	}
+
 	return (
 		<div>
 			{/* <Button
@@ -24,8 +33,8 @@ export default function Callendar({
 			<div id='myCalendar'>
 				<FullCalendar
 					eventOverlap={false}
-					plugins={[timeGridPlugin, interactionPlugin]}
-					selectable
+					plugins={plugins}
+					selectable={selectable}
 					select={handleInputEvent}
 					eventClick={handleClickEvent}
 					eventChange={handleChangeEvent}

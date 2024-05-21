@@ -1,3 +1,4 @@
+import React from 'react';
 import { useProfessors } from '../context/ProfessorsContext';
 import ProfessorSubject from './ProfessorSubject';
 import Table from '../../../components/Table';
@@ -6,8 +7,15 @@ import { Professors } from '../def';
 import { BiTrash, BiPencil } from 'react-icons/bi';
 import { MdUpdate } from 'react-icons/md';
 import { GrScheduleNew } from 'react-icons/gr';
+import ProfessorSchedule from './ProfessorsSchedule';
+import { ScheduleEventData } from '../../schedules/def';
 
 export default function ProfessorsTable() {
+	const [openEventModal, setOpenEventModal] = React.useState<boolean>(false);
+	const [events, setEvents] = React.useState<ScheduleEventData[]>([]);
+
+	const handleToggleSubjectModal = () => setOpenEventModal(!openEventModal);
+
 	const {
 		professors,
 		handleUpdate,
@@ -66,7 +74,10 @@ export default function ProfessorsTable() {
 						<button
 							className='text-2xl text-orange-500 hover:scale-125 transition-transform duration-300'
 							title='Ver horario'
-							onClick={() => {}}
+							onClick={() => {
+								setOpenEventModal(true);
+								setEvents(cell.schedule);
+							}}
 						>
 							<GrScheduleNew />
 						</button>
@@ -103,6 +114,12 @@ export default function ProfessorsTable() {
 				open={openSubjectModal}
 				close={handleOpenSubjectModal}
 				handleAsignSubject={handleAsignSubject}
+			/>
+
+			<ProfessorSchedule
+				open={openEventModal}
+				close={handleToggleSubjectModal}
+				events={events}
 			/>
 
 			{!professors.length && <p>No hay profesores</p>}
