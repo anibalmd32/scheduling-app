@@ -23,6 +23,7 @@ export interface ProfessorsCtx {
 	isLoading: boolean;
 	loadData: () => Promise<void>;
 	professorId: string;
+	setProfessorId: React.Dispatch<React.SetStateAction<string>>
 	openForm: boolean;
 	handleOpenForm: () => void
 	handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void

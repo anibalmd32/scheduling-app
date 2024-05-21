@@ -109,7 +109,8 @@ export const ProfessorsContextProvider = ({ children }: { children: React.ReactN
 			handleDelete,
 			openSubjectModal,
 			handleOpenSubjectModal,
-			handleAsignSubject
+			handleAsignSubject,
+			setProfessorId
 		}}>
 			{children}
 		</ProfessorsContext.Provider>

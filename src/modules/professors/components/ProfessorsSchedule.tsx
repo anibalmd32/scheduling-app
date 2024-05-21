@@ -12,6 +12,8 @@ export default function ProfessorSchedule({ events, open, close }: {
 
 	const [openModalDetails, setOpenModalDetails] = React.useState<boolean>(false);
 	const [details, setDetails] = React.useState<ScheduleEventData>();
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const [callendarEvent, setCallendarEvent] = React.useState<any>();
 
 	const handleToggleDetails = () => setOpenModalDetails(!openModalDetails);
 
@@ -27,6 +29,7 @@ export default function ProfessorSchedule({ events, open, close }: {
 				details={details}
 				close={handleToggleDetails}
 				open={openModalDetails}
+				callendarEvent={callendarEvent}
 			/>
 			{
 				events ? (
@@ -34,6 +37,7 @@ export default function ProfessorSchedule({ events, open, close }: {
 						events={events}
 						handleInputEvent={() => {}}
 						handleClickEvent={(event) => {
+							setCallendarEvent(event);
 							const eventId = event.event.id;
 							handleOpenModalDetails(eventId);
 						}}

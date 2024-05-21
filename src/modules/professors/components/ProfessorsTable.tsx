@@ -22,7 +22,8 @@ export default function ProfessorsTable() {
 		handleDelete,
 		openSubjectModal,
 		handleOpenSubjectModal,
-		handleAsignSubject
+		handleAsignSubject,
+		setProfessorId
 	} = useProfessors();
 
 	const columns: RenderCell<Professors>[] = [
@@ -75,6 +76,7 @@ export default function ProfessorsTable() {
 							className='text-2xl text-orange-500 hover:scale-125 transition-transform duration-300'
 							title='Ver horario'
 							onClick={() => {
+								setProfessorId(cell._id);
 								setOpenEventModal(true);
 								setEvents(cell.schedule);
 							}}

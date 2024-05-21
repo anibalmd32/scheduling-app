@@ -38,3 +38,10 @@ export const asignProfessorSubject = async (professorID: string, data: unknown) 
 		body: data
 	});
 };
+
+export const deleteProfessorSubject = async (subjectId: string, professorID: string) => {
+	await service.httpCaller({
+		endpoint: `/delete-subject/${professorID}/${subjectId}`,
+		method: 'delete',
+	});
+};
