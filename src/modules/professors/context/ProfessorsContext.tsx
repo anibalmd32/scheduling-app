@@ -1,7 +1,7 @@
 import React from 'react';
 import useData from '../../../hooks/useData';
 import useForm from '../../../hooks/useForm';
-import { createProfessor, updateProfessor, deleteProfessor } from '../services/professorsService';
+import { createProfessor, updateProfessor, deleteProfessor, asignProfessorSubject } from '../services/professorsService';
 import { ProfessorsCtx, Professors, ProfessorFormValues } from '../def';
 
 const ProfessorsContext = React.createContext<ProfessorsCtx>({} as ProfessorsCtx);
@@ -9,6 +9,7 @@ const ProfessorsContext = React.createContext<ProfessorsCtx>({} as ProfessorsCtx
 export const ProfessorsContextProvider = ({ children }: { children: React.ReactNode }) => {
 	const [professorId, setProfessorId] = React.useState<string>('');
 	const [openForm, setOpenForm] = React.useState<boolean>(false);
+	const [openSubjectModal, setOpenSubjectModal] = React.useState<boolean>(false);
 	const [formValues, setFormValues] = React.useState<ProfessorFormValues>({
 		firstName: '',
 		lastName: '',
@@ -39,6 +40,13 @@ export const ProfessorsContextProvider = ({ children }: { children: React.ReactN
 		});
 	};
 
+	const handleOpenSubjectModal = (professorId?: string) => {
+		if (professorId) {
+			setProfessorId(professorId);
+		}
+		setOpenSubjectModal(!openSubjectModal);
+	};
+
 	const handleUpdate = (row: Professors) => {
 		setProfessorId(row._id);
 		setFormValues(row.data);
@@ -51,6 +59,16 @@ export const ProfessorsContextProvider = ({ children }: { children: React.ReactN
 			loadData();
 		} catch (error) {
 			console.error('Ocurrio un error al eliminar el profesor', error);
+		}
+	};
+
+	const handleAsignSubject = async (scheduleSelected: unknown) => {
+		try {
+			await asignProfessorSubject(professorId, scheduleSelected);
+			loadData();
+			handleOpenSubjectModal();
+		} catch (error) {
+			console.error('Ocurrio un error al asignar la materia', error);
 		}
 	};
 
@@ -88,7 +106,10 @@ export const ProfessorsContextProvider = ({ children }: { children: React.ReactN
 			onSubmit,
 			handleSubmit,
 			handleUpdate,
-			handleDelete
+			handleDelete,
+			openSubjectModal,
+			handleOpenSubjectModal,
+			handleAsignSubject
 		}}>
 			{children}
 		</ProfessorsContext.Provider>

@@ -1,13 +1,21 @@
 import { useProfessors } from '../context/ProfessorsContext';
+import ProfessorSubject from './ProfessorSubject';
 import Table from '../../../components/Table';
 import { RenderCell } from '../../../components/ui';
 import { Professors } from '../def';
-import { BiTrash } from 'react-icons/bi';
+import { BiTrash, BiPencil } from 'react-icons/bi';
 import { MdUpdate } from 'react-icons/md';
 import { GrScheduleNew } from 'react-icons/gr';
 
 export default function ProfessorsTable() {
-	const { professors, handleUpdate, handleDelete } = useProfessors();
+	const {
+		professors,
+		handleUpdate,
+		handleDelete,
+		openSubjectModal,
+		handleOpenSubjectModal,
+		handleAsignSubject
+	} = useProfessors();
 
 	const columns: RenderCell<Professors>[] = [
 		{
@@ -56,6 +64,13 @@ export default function ProfessorsTable() {
 				return (
 					<div className='flex gap-4'>
 						<button
+							className='text-2xl text-orange-500 hover:scale-125 transition-transform duration-300'
+							title='Ver horario'
+							onClick={() => {}}
+						>
+							<GrScheduleNew />
+						</button>
+						<button
 							className='text-2xl text-blue-500 hover:scale-125 transition-transform duration-300'
 							title='Actualizar'
 							onClick={() => handleUpdate(cell)}
@@ -63,18 +78,18 @@ export default function ProfessorsTable() {
 							<MdUpdate />
 						</button>
 						<button
+							className='text-2xl text-green-500 hover:scale-125 transition-transform duration-300'
+							title='Asiganr materia'
+							onClick={() => handleOpenSubjectModal(cell._id)}
+						>
+							<BiPencil />
+						</button>
+						<button
 							className='text-2xl text-red-500 hover:scale-125 transition-transform duration-300'
 							title='Eliminar'
 							onClick={() => handleDelete(cell)}
 						>
 							<BiTrash />
-						</button>
-						<button
-							className='text-2xl text-green-500 hover:scale-125 transition-transform duration-300'
-							title='Eliminar'
-							onClick={() => {}}
-						>
-							<GrScheduleNew />
 						</button>
 					</div>
 				);
@@ -84,6 +99,12 @@ export default function ProfessorsTable() {
 
 	return (
 		<div>
+			<ProfessorSubject
+				open={openSubjectModal}
+				close={handleOpenSubjectModal}
+				handleAsignSubject={handleAsignSubject}
+			/>
+
 			{!professors.length && <p>No hay profesores</p>}
 			{
 				professors.length && <Table

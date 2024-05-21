@@ -30,3 +30,11 @@ export const deleteProfessor = async (professorID: string) => {
 		method: 'delete',
 	});
 };
+
+export const asignProfessorSubject = async (professorID: string, data: unknown) => {
+	await service.httpCaller({
+		endpoint: `/asign/${professorID}`,
+		method: 'put',
+		body: data
+	});
+};

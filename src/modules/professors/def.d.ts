@@ -31,5 +31,8 @@ export interface ProfessorsCtx {
 	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => ProfessorFormValues
 	handleUpdate: (row: Professors) => void
 	handleDelete: (row: Professors) => Promise<void>
+	openSubjectModal: boolean
+	handleOpenSubjectModal: ( professorId?: string) => void
+	handleAsignSubject: (scheduleSelected: unknown) => Promise<void>
 }
 
