@@ -3,7 +3,7 @@ import { MenuItemProps } from '../components/ui';
 import { FaHome } from 'react-icons/fa';
 import { GrScheduleNew } from 'react-icons/gr';
 // import { SiGoogleclassroom } from 'react-icons/si';
-// import { FaChalkboardTeacher } from 'react-icons/fa';
+import { FaChalkboardTeacher } from 'react-icons/fa';
 import { PiNotebookFill } from 'react-icons/pi';
 
 const navigation: MenuItemProps[] = [
@@ -22,11 +22,11 @@ const navigation: MenuItemProps[] = [
 	// 	label: 'Aulas',
 	// 	path: '/classrooms'
 	// },
-	// {
-	// 	icon: FaChalkboardTeacher,
-	// 	label: 'Profesores',
-	// 	path: '/professors'
-	// },
+	{
+		icon: FaChalkboardTeacher,
+		label: 'Profesores',
+		path: '/professors'
+	},
 	{
 		icon: PiNotebookFill,
 		label: 'Semestres',
