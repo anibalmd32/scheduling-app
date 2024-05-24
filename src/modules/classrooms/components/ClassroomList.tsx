@@ -12,9 +12,6 @@ function ClassroomList() {
 					? <ClipLoader size={80} />
 					: (
 						<>
-							<h1 className='text-4xl font-semibold text-blue-950 mb-8'>
-								Aulas
-							</h1>
 							<div className='md:flex flex-wrap gap-8 justify-center'>
 								{
 									classroomsData.map(classroom => (

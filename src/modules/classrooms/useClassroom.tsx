@@ -1,36 +1,21 @@
-import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
+import { ReactNode, createContext, useContext,  } from 'react';
 import { IClassroomContext, Classroom } from './def';
+import useData from '../../hooks/useData';
 
 const ClassroomContext = createContext<IClassroomContext>({} as IClassroomContext);
 
-export function ClassroomProvider({
-	children
-}: {
-	children: ReactNode
-}) {
-	const [classroomsData, setClassroomsData] = useState<Classroom[]>([]);
-	const [isLoading, setIsLoading] = useState<boolean>(true);
-
-	const getClassroomsData = async () => {		
-		try {
-
-			setClassroomsData([]);
-		} catch (error) {
-			console.error(error);
-		} finally {
-			setIsLoading(false);
+export function ClassroomProvider({ children }: { children: ReactNode }) {
+	const { data: classroomsData, isLoading } = useData<Classroom[]>({
+		module: 'classrooms',
+		requestConfig: {
+			endpoint: '/',
+			method: 'get'
 		}
-	};
-
-	useEffect(() => {
-		if (!classroomsData.length && isLoading) {
-			getClassroomsData();
-		}
-	}, [classroomsData, isLoading]);
+	});
 
 	return (
 		<ClassroomContext.Provider value={{
-			classroomsData,
+			classroomsData: classroomsData || [],
 			isLoading
 		}}>
 			{children}

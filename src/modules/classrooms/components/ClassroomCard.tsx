@@ -1,6 +1,6 @@
+import React from 'react';
 import useSchedule from '../hooks/useSchedule';
 import { Classroom,  } from '../def';
-import { AiTwotoneSchedule } from 'react-icons/ai';
 
 import Modal from '../../../components/Modal';
 
@@ -10,6 +10,9 @@ function ClassroomCard({
 	degrees,
 }: Classroom) {
 	const { handleOpenModal, isOpenModal } = useSchedule();
+	const [isActive, setIsActive] = React.useState<boolean>(true);
+
+	const handleToggleActive = () => setIsActive(!isActive);
 
 	return (
 		<article className="border-2 border-blue-500 rounded-lg shadow-lg overflow-hidden md:min-w-40 mb-8 md:mb-0 pb-4">
@@ -26,12 +29,17 @@ function ClassroomCard({
 				</ul>
 			</div>
 			<div className='flex gap-4 justify-center items-center'>
-				<button
-					className='text-2xl text-blue-600 hover:scale-110 transition-transform duration-300'
-					title='Generar horario'
-				>
-					<AiTwotoneSchedule />
-				</button>
+				<label>
+					<span className='text-xl text-blue-600 hover:scale-110 transition-transform duration-300'>
+						Activo
+					</span>
+					<input
+						type="checkbox"
+						className="ml-2 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+						checked={isActive}
+						onChange={handleToggleActive}
+					/>
+				</label>
 			</div>
 
 			<Modal open={isOpenModal} onClose={handleOpenModal} >
