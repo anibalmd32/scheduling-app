@@ -21,6 +21,7 @@ export interface ClassroomData extends Classroom {
 export interface IClassroomContext {
 	classroomsData: Classroom[];
 	isLoading: boolean;
+	loadData: () => Promise<void>
 }
 
 export interface ScheduleParams {

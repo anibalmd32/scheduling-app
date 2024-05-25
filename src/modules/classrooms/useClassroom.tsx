@@ -5,7 +5,7 @@ import useData from '../../hooks/useData';
 const ClassroomContext = createContext<IClassroomContext>({} as IClassroomContext);
 
 export function ClassroomProvider({ children }: { children: ReactNode }) {
-	const { data: classroomsData, isLoading } = useData<Classroom[]>({
+	const { data: classroomsData, isLoading, loadData } = useData<Classroom[]>({
 		module: 'classrooms',
 		requestConfig: {
 			endpoint: '/',
@@ -16,7 +16,8 @@ export function ClassroomProvider({ children }: { children: ReactNode }) {
 	return (
 		<ClassroomContext.Provider value={{
 			classroomsData: classroomsData || [],
-			isLoading
+			isLoading,
+			loadData
 		}}>
 			{children}
 		</ClassroomContext.Provider>

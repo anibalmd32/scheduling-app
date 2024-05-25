@@ -104,3 +104,8 @@ export interface AddToClassroomValues {
   semester: string; 
   subject: string;
 }
+
+interface ClassroomFormValues {
+	code: string;
+	category: string;
+}
