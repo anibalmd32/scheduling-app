@@ -4,7 +4,9 @@ export interface DaySchema {
 }
 
 export interface Classroom {
+	_id: string;
 	code: string;
+	isActive: boolean;
 	category: 'laboratory' | 'normal' | 'pc';
 	degrees: string[];
 	availability: DaySchema[];

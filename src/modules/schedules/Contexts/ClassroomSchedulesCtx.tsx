@@ -87,7 +87,10 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 		module: 'classrooms',
 		requestConfig: {
 			endpoint: endpointLib.getClassroomList(),
-			method: 'get'
+			method: 'get',
+			params: {
+				isActive: true
+			}
 		}
 	}); // Get data for schedule
 

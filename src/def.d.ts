@@ -4,6 +4,7 @@ export interface RequestParams {
 	degree?: string;
 	semester?: string;
 	classroom?: string;
+	isActive?: boolean;
 }
 
 export type RequestBody = unknown

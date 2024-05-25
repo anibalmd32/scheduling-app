@@ -1,18 +1,34 @@
 import React from 'react';
 import useSchedule from '../hooks/useSchedule';
-import { Classroom,  } from '../def';
+import { Classroom } from '../def';
+import HTTPService from '../../../http.service';
 
 import Modal from '../../../components/Modal';
 
+const service = new HTTPService('classrooms');
+
 function ClassroomCard({
+	_id,
 	category,
 	code,
 	degrees,
+	isActive: isActiveProp,
 }: Classroom) {
 	const { handleOpenModal, isOpenModal } = useSchedule();
-	const [isActive, setIsActive] = React.useState<boolean>(true);
+	const [isActive, setIsActive] = React.useState<boolean>(isActiveProp);
 
-	const handleToggleActive = () => setIsActive(!isActive);
+	const handleToggleActive = async () => {
+		try {
+			await service.httpCaller({
+				endpoint: `/${_id}`,
+				method: 'patch',
+				body: { isActive: !isActive }
+			});
+			setIsActive(!isActive);
+		} catch (error) {
+			console.error('Ocurrio un error al cambiar el estado de la aula', error);
+		}
+	};
 
 	return (
 		<article className="border-2 border-blue-500 rounded-lg shadow-lg overflow-hidden md:min-w-40 mb-8 md:mb-0 pb-4">
