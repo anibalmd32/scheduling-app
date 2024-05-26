@@ -1,12 +1,18 @@
 import React from 'react';
-import { ClassroomProvider } from './useClassroom';
+import { ClassroomProvider } from './hooks/useClassroom';
 import ClassroomList from './components/ClassroomList';
 import Button from '../../components/Button';
 import ClassroomForm from './components/ClassromForm';
+import Toast from '../../components/Toast';
 
 function Classrooms() {	
 
 	const [openForm, setOpenForm] = React.useState(false);
+	const [showToast, setShowToast] = React.useState({
+		loading: false,
+		success: false,
+		error: false
+	});
 
 	const handleOpenForm = () => setOpenForm(!openForm);
 	return (
@@ -22,7 +28,33 @@ function Classrooms() {
 				<ClassroomForm
 					open={openForm}
 					onClose={handleOpenForm}
+					setShowToast={setShowToast}
+					showToast={showToast}
 				/>
+
+				{showToast.loading && (
+					<Toast
+						message='Cargando'
+						variant='info'
+						isLoader
+					/>
+				)}
+
+				{showToast.success && (
+					<Toast
+						message='Exito en la operacion'
+						variant='success'
+						duraction={3000}
+					/>
+				)}
+
+				{showToast.error && (
+					<Toast
+						message='Error en la operacion'
+						variant='error'
+						duraction={3000}
+					/>
+				)}
 			</section>
 		</ClassroomProvider>
 	);

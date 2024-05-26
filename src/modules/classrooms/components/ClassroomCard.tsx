@@ -3,7 +3,8 @@ import { Classroom } from '../def';
 import HTTPService from '../../../http.service';
 import ClassroomForm from './ClassromForm';
 import Button from '../../../components/Button';
-import useClassroom from '../useClassroom';
+import useClassroom from '../hooks/useClassroom';
+import Toast from '../../../components/Toast';
 
 const service = new HTTPService('classrooms');
 
@@ -16,33 +17,72 @@ function ClassroomCard({
 }: Classroom) {
 	const [isActive, setIsActive] = React.useState<boolean>(isActiveProp);
 	const [openForm, setOpenForm] = React.useState(false);
+	const [showToast, setShowToast] = React.useState({
+		loading: false,
+		success: false,
+		error: false
+	});
 
 	const { loadData } = useClassroom();
 
 	const handleOpenForm = () => setOpenForm(!openForm);
 
 	const handleToggleActive = async () => {
+		setShowToast({
+			...showToast,
+			loading: true,
+			success: false,
+			error: false
+		});
 		try {
 			await service.httpCaller({
 				endpoint: `/${_id}`,
 				method: 'patch',
 				body: { isActive: !isActive }
 			});
+			setShowToast({
+				...showToast,
+				loading: false,
+				success: true,
+				error: false
+			});
 			setIsActive(!isActive);
 		} catch (error) {
-			console.error('Ocurrio un error al cambiar el estado de la aula', error);
+			setShowToast({
+				...showToast,
+				loading: false,
+				success: false,
+				error: true
+			});
 		}
 	};
 
 	const handleDelete = async () => {
+		setShowToast({
+			...showToast,
+			loading: true,
+			success: false,
+			error: false
+		});
 		try {
 			await service.httpCaller({
 				endpoint: `/${_id}`,
 				method: 'delete'
 			});
+			setShowToast({
+				...showToast,
+				loading: false,
+				success: true,
+				error: false
+			});
 			loadData();
 		} catch (error) {
-			console.error('Ocurrio un error al eliminar la aula', error);
+			setShowToast({
+				...showToast,
+				loading: false,
+				success: false,
+				error: true
+			});
 		}
 	};
 
@@ -102,7 +142,33 @@ function ClassroomCard({
 					category
 				}}
 				classroomId={_id}
+				showToast={showToast}
+				setShowToast={setShowToast}
 			/>
+
+			{showToast.loading && (
+				<Toast
+					message='Cargando'
+					variant='info'
+					isLoader
+				/>
+			)}
+
+			{showToast.success && (
+				<Toast
+					message='Exito en la operacion'
+					variant='success'
+					duraction={3000}
+				/>
+			)}
+
+			{showToast.error && (
+				<Toast
+					message='Error en la operacion'
+					variant='error'
+					duraction={3000}
+				/>
+			)}
 		</article>
 	);
 }

@@ -8,22 +8,33 @@ import useForm from '../../../hooks/useForm';
 import { SelectItem } from '../../../components/ui';
 import HTTPService from '../../../http.service';
 import { ClassroomFormValues } from '../../schedules/def';
-import useClassroom from '../useClassroom';
+import useClassroom from '../hooks/useClassroom';
 
 interface Props {
 	open: boolean;
 	onClose: () => void;
+	showToast: {
+		loading: boolean;
+		success: boolean;
+		error: boolean;
+	}
+	setShowToast: ({ loading, success, error }: {
+		loading: boolean;
+		success: boolean;
+		error: boolean;
+	}) => void;
 	defaultValues?: ClassroomFormValues;
 	classroomId?: string;
 }
 
 const service = new HTTPService('classrooms');
 
-export default function ClassroomForm({ open, onClose, defaultValues, classroomId }: Props) {
+export default function ClassroomForm({ open, onClose, defaultValues, classroomId, showToast, setShowToast }: Props) {
 	const [formValues, setFormValues] = useState<ClassroomFormValues>(defaultValues || {
 		code: '',
 		category: 'normal',
 	});
+
 	const [categories] = useState<SelectItem[]>([
 		{
 			label: 'Laboratorio',
@@ -56,6 +67,12 @@ export default function ClassroomForm({ open, onClose, defaultValues, classroomI
 
 	const onSubmit = async (data: ClassroomFormValues) => {
 		if (classroomId) {
+			setShowToast({
+				...showToast,
+				loading: true,
+				success: false,
+				error: false
+			});
 			try {
 				await service.httpCaller({
 					endpoint: `/${classroomId}`,
@@ -63,10 +80,21 @@ export default function ClassroomForm({ open, onClose, defaultValues, classroomI
 					body: data
 				});
 				onClose();
+				setShowToast({
+					...showToast,
+					loading: false,
+					success: true,
+					error: false
+				});
 				resetForm();
 				loadData();
 			} catch (error) {
-				console.error('Ocurrio un error al actualizar la aula', error);
+				setShowToast({
+					...showToast,
+					loading: false,
+					success: false,
+					error: true
+				});
 			}
 		} else {
 			try {
@@ -76,10 +104,21 @@ export default function ClassroomForm({ open, onClose, defaultValues, classroomI
 					body: data
 				});
 				onClose();
+				setShowToast({
+					...showToast,
+					loading: false,
+					success: true,
+					error: false
+				});
 				resetForm();
 				loadData();
 			} catch (error) {
-				console.error('Ocurrio un error al crear la aula', error);
+				setShowToast({
+					...showToast,
+					loading: false,
+					success: false,
+					error: true
+				});
 			}
 		}
 	};

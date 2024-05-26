@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useContext,  } from 'react';
-import { IClassroomContext, Classroom } from './def';
-import useData from '../../hooks/useData';
+import { IClassroomContext, Classroom } from '../def';
+import useData from '../../../hooks/useData';
 
 const ClassroomContext = createContext<IClassroomContext>({} as IClassroomContext);
 

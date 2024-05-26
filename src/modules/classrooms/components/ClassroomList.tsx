@@ -1,4 +1,4 @@
-import useClassroom from '../useClassroom';
+import useClassroom from '../hooks/useClassroom';
 import ClassroomCard from './ClassroomCard';
 import { ClipLoader } from 'react-spinners';
 
