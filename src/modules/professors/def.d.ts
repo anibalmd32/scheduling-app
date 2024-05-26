@@ -35,5 +35,10 @@ export interface ProfessorsCtx {
 	openSubjectModal: boolean
 	handleOpenSubjectModal: ( professorId?: string) => void
 	handleAsignSubject: (scheduleSelected: unknown) => Promise<void>
+	showToast: {
+		loading: boolean;
+		success: boolean;
+		error: boolean;
+	}
 }
 

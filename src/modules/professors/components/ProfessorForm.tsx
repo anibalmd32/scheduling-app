@@ -5,12 +5,17 @@ import Form from '../../../components/Form';
 import Input from '../../../components/Input';
 
 export default function ProfessorForm() {
-	const { formData, handleChange, handleSubmit, handleOpenForm, openForm, onSubmit } = useProfessors();
+	const { formData, handleChange, handleSubmit, handleOpenForm, openForm, onSubmit, professorId } = useProfessors();
 
 	return (
 		<Modal onClose={() => {
 			handleOpenForm();
 		}} open={openForm}>
+			<div>
+				<h1 className='text-2xl font-bold'>
+					{professorId ? 'Editar profesor' : 'Agregar profesor'}
+				</h1>
+			</div>
 			<Form onSubmit={(e) => onSubmit(handleSubmit(e))}>
 				<Input
 					name='firstName'

@@ -23,7 +23,7 @@ function Button ({
 			type={type}
 			disabled={disabled}
 			className={`
-				w-fit rounded-lg transition-colors duration-300 p-2 shadow-gray-400 shadow-sm text-gray-200 hover:text-gray-100 font-semibold
+				w-fit rounded-lg transition-colors duration-300 p-2 shadow-gray-400 shadow-sm text-gray-200 hover:text-gray-100 font-semibold disabled:opacity-50
 				${isPressed && 'shadow-inner'}
 			`}
 			style={{

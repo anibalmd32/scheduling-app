@@ -9,6 +9,8 @@ import { MdUpdate } from 'react-icons/md';
 import { GrScheduleNew } from 'react-icons/gr';
 import ProfessorSchedule from './ProfessorsSchedule';
 import { ScheduleEventData } from '../../schedules/def';
+import { ClipLoader } from 'react-spinners';
+import Toast from '../../../components/Toast';
 
 export default function ProfessorsTable() {
 	const [openEventModal, setOpenEventModal] = React.useState<boolean>(false);
@@ -23,7 +25,9 @@ export default function ProfessorsTable() {
 		openSubjectModal,
 		handleOpenSubjectModal,
 		handleAsignSubject,
-		setProfessorId
+		setProfessorId,
+		isLoading,
+		showToast
 	} = useProfessors();
 
 	const columns: RenderCell<Professors>[] = [
@@ -124,12 +128,41 @@ export default function ProfessorsTable() {
 				events={events}
 			/>
 
-			{!professors.length && <p>No hay profesores</p>}
-			{
-				professors.length && <Table
-					data={professors}
-					cells={columns}
+			{showToast.loading && (
+				<Toast
+					message='Cargando'
+					variant='info'
+					isLoader
 				/>
+			)}
+
+			{showToast.success && (
+				<Toast
+					message='Exito en la operacion'
+					variant='success'
+					duraction={3000}
+				/>
+			)}
+
+			{showToast.error && (
+				<Toast
+					message='Error en la operacion'
+					variant='error'
+					duraction={3000}
+				/>
+			)}
+
+			{
+				isLoading
+					? <ClipLoader size={80} />
+					: professors.length ? (
+						<Table
+							data={professors}
+							cells={columns}
+						/>
+					) : (
+						<p>No hay profesores</p>
+					)
 			}
 		</div>
 	);

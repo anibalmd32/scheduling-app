@@ -10,6 +10,11 @@ export const ProfessorsContextProvider = ({ children }: { children: React.ReactN
 	const [professorId, setProfessorId] = React.useState<string>('');
 	const [openForm, setOpenForm] = React.useState<boolean>(false);
 	const [openSubjectModal, setOpenSubjectModal] = React.useState<boolean>(false);
+	const [showToast, setShowToast] = React.useState({
+		loading: false,
+		success: false,
+		error: false
+	});
 	const [formValues, setFormValues] = React.useState<ProfessorFormValues>({
 		firstName: '',
 		lastName: '',
@@ -38,6 +43,10 @@ export const ProfessorsContextProvider = ({ children }: { children: React.ReactN
 			email: '',
 			phone: '',
 		});
+
+		if (openForm === false) {
+			setProfessorId('');
+		}
 	};
 
 	const handleOpenSubjectModal = (professorId?: string) => {
@@ -54,41 +63,110 @@ export const ProfessorsContextProvider = ({ children }: { children: React.ReactN
 	};
 
 	const handleDelete = async (row: Professors) => {
+		setShowToast({
+			...showToast,
+			loading: true,
+			success: false,
+			error: false
+		});
 		try {
 			await deleteProfessor(row._id);
+			setShowToast({
+				...showToast,
+				loading: false,
+				success: true,
+				error: false
+			});
 			loadData();
 		} catch (error) {
-			console.error('Ocurrio un error al eliminar el profesor', error);
+			setShowToast({
+				...showToast,
+				loading: false,
+				success: false,
+				error: true
+			});
 		}
 	};
 
 	const handleAsignSubject = async (scheduleSelected: unknown) => {
+		setShowToast({
+			...showToast,
+			loading: true,
+			success: false,
+			error: false
+		});
 		try {
 			await asignProfessorSubject(professorId, scheduleSelected);
+			setShowToast({
+				...showToast,
+				loading: false,
+				success: true,
+				error: false
+			});
 			loadData();
 			handleOpenSubjectModal();
 		} catch (error) {
-			console.error('Ocurrio un error al asignar la materia', error);
+			setShowToast({
+				...showToast,
+				loading: false,
+				success: false,
+				error: true
+			});
+		} finally {
+			setProfessorId('');
 		}
 	};
 
 	const onSubmit = async (data: ProfessorFormValues) => {
+		setShowToast({
+			...showToast,
+			loading: true,
+			success: false,
+			error: false
+		});
 		if (professorId) {
 			try {
 				await updateProfessor(professorId, data);
+				setShowToast({
+					...showToast,
+					loading: false,
+					success: true,
+					error: false
+				});
 				loadData();
 				handleOpenForm();
 			} catch (error) {
-				console.error('Ocurrio un error al actualizar el profesor', error);
+				setShowToast({
+					...showToast,
+					loading: false,
+					success: false,
+					error: true
+				});
 			}
 		} else {
+			setShowToast({
+				...showToast,
+				loading: false,
+				success: false,
+				error: false
+			});
 			try {
-				const newProfessor = await createProfessor(data);
-				console.log(newProfessor);
+				await createProfessor(data);
+				setShowToast({
+					...showToast,
+					loading: false,
+					success: true,
+					error: false
+				});
 				loadData();
 				handleOpenForm();
 			} catch (error) {
-				console.error('Ocurrio un error al crear el profesor', error);
+				setShowToast({
+					...showToast,
+					loading: false,
+					success: false,
+					error: true
+				});
 			}
 		}
 	};
@@ -110,7 +188,8 @@ export const ProfessorsContextProvider = ({ children }: { children: React.ReactN
 			openSubjectModal,
 			handleOpenSubjectModal,
 			handleAsignSubject,
-			setProfessorId
+			setProfessorId,
+			showToast
 		}}>
 			{children}
 		</ProfessorsContext.Provider>

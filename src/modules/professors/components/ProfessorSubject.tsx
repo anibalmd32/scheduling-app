@@ -59,7 +59,7 @@ export default function ProfessorSubject({ open, close, handleAsignSubject }: {
 			setSelectedItem('');
 		}}>
 			{
-				items.length && <Select
+				items.length ? <Select
 					items={items}
 					label='Seleccione una materia para asignar a este profesor'
 					name='subject'
@@ -67,7 +67,9 @@ export default function ProfessorSubject({ open, close, handleAsignSubject }: {
 						handleSelect(e.target.value);
 					}}
 					value={selectedItem}
-				/>
+				/> : (
+					<p className='mt-4 text-center text-gray-500'>No hay materias para asignar</p>
+				)
 			}
 
 			<div className='mt-4'>
@@ -79,6 +81,7 @@ export default function ProfessorSubject({ open, close, handleAsignSubject }: {
 					label='Asignar'
 					type='button'
 					variant='success'
+					disabled={!selectedItem}
 				/>
 			</div>
 				
