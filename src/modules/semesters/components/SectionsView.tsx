@@ -13,7 +13,7 @@ import { SectionViewProps } from '../def';
 import Button from '../../../components/Button';
 
 // * ICONS
-import {FaPlusSquare } from 'react-icons/fa';
+// import {FaPlusSquare } from 'react-icons/fa';
 // import Input from '../../../components/Input';
 
 function SectionsView({
@@ -50,11 +50,11 @@ function SectionsView({
 						value={selectedSection}
 					/>
 				</div>
-				<div className='mt-12'>
+				{/* <div className='mt-12'>
 					<button className='text-5xl text-blue-500 hover:scale-110 transition-transform duration-300'>
 						<FaPlusSquare />
 					</button>
-				</div>
+				</div> */}
 			</div>
 
 			<div className='mt-4'>

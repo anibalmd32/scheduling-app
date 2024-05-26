@@ -6,7 +6,9 @@ function SemestersList() {
 
 	return (
 		<>
-			{semestersTabItems?.length && <Tabs items={semestersTabItems} />}
+			{semestersTabItems?.length ? <Tabs items={semestersTabItems} /> : (
+				<p className='mt-4'>No hay semestres</p>
+			)}
 			
 		</>
 	);
