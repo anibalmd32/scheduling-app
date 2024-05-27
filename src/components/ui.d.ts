@@ -138,5 +138,6 @@ export interface CallendarProps {
 	onDeletEvent: (args: EventRemoveArg) => void;
 	interactive?: boolean;
 	selectable?: boolean;
+	forPint?: boolean;
 }
 

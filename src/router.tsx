@@ -7,6 +7,7 @@ import Schedules from './modules/schedules/Schedules';
 import Classrooms from './modules/classrooms/Classrooms';
 import Professors from './modules/professors/Professors';
 import Semesters from './modules/semesters/Semester';
+import PrintSchedule from './modules/print/PrintSchedule';
 
 const router = createBrowserRouter([
 	{
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
 				element: <Semesters />
 			}
 		]
+	},
+	{
+		path: '/print',
+		element: <PrintSchedule />
 	}
 ]);
 

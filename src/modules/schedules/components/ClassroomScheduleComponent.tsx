@@ -24,6 +24,17 @@ export const ClassroomScheduleComponent = () => {
 		openModal,
 	} = useClassroomSchdule();
 
+	const handlerPrint = async () => {
+		try {
+			const pdf = await fetch(`/api/pdf?for=classrooms&id=${classroomSelectValue}`).then(res => res.blob());
+			const url = URL.createObjectURL(pdf);
+			window.open(url);
+		} catch (error) {
+			console.error('Ocurrio un error al generar el PDF', error);
+		}
+		
+	};
+
 	if (isLoading) {
 		return <Spinner size={200} />;
 	}
@@ -39,16 +50,19 @@ export const ClassroomScheduleComponent = () => {
 				value={classroomSelectValue}
 			/>
 
-			<Callendar
-				events={classroomSchduleEvents}
-				handleChangeEvent={handleChangeSubject}
-				handleClickEvent={handleClickSubject}
-				handleInputEvent={handleInputSubject}
-				onAddEvent={onAddSubject}
-				onDeletEvent={onDeleteSubject}
-				selectable
-				interactive
-			/>
+			<div className='mt-4'>
+				<Callendar
+					events={classroomSchduleEvents}
+					handleChangeEvent={handleChangeSubject}
+					handleClickEvent={handleClickSubject}
+					handleInputEvent={handleInputSubject}
+					onAddEvent={onAddSubject}
+					onDeletEvent={onDeleteSubject}
+					selectable
+					interactive
+					onExport={handlerPrint}
+				/>
+			</div>
 
 			<ScheduleForm
 				open={openModal.forAdd}

@@ -5,6 +5,7 @@ export interface RequestParams {
 	semester?: string;
 	classroom?: string;
 	isActive?: boolean;
+	for?: string;
 }
 
 export type RequestBody = unknown
@@ -23,6 +24,7 @@ export type AppModule =
 | 'schedules'
 | 'semesters'
 | 'degrees'
+| 'pdf';
 
 export interface DataHookProps {
 	module: AppModule;

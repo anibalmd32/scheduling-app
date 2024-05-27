@@ -1,7 +1,8 @@
 import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-// import Button from './Button';
+import { ScheduleEventData } from '../modules/schedules/def';
+import Button from './Button';
 import { CallendarProps } from './ui';
 
 export default function Callendar({
@@ -13,7 +14,8 @@ export default function Callendar({
 	onDeletEvent,
 	interactive,
 	selectable,
-	// onExport,
+	forPint,
+	onExport,
 }: CallendarProps) {
 	
 	// Condicionalmente incluir interactionPlugin
@@ -24,12 +26,15 @@ export default function Callendar({
 
 	return (
 		<div>
-			{/* <Button
-				label='Exportar a PDF'
-				type='button'
-				variant='info'
-				onClick={onExport}
-			/> */}
+			{!forPint && (
+				<Button
+					label='Exportar a PDF'
+					type='button'
+					variant='info'
+					onClick={onExport}
+				/>
+			)}
+
 			<div id='myCalendar'>
 				<FullCalendar
 					eventOverlap={false}
@@ -67,9 +72,23 @@ export default function Callendar({
 					}}
 					events={events}
 					eventContent={eventInfo => {
+						const event = eventInfo.event as unknown as ScheduleEventData;
 						return (
-							<div>
-								{eventInfo.event.title}
+							<div className=''>
+								{
+									forPint ? (
+										<div className='text-sm text-black'>
+											<p>
+												Materia: {event.title}
+											</p>
+		
+										</div>
+									) : (
+										<div>
+											{eventInfo.event.title}
+										</div>
+									)
+								}
 							</div>
 						);
 					}}
