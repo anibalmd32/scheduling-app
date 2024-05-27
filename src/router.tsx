@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import Layout from './Layout/Layout';
 
 // *Pages
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
 		path: '/',
 		element: <Layout />,
 		children: [
+			{
+				path: '/',
+				element: <Navigate to="/schedules" replace />
+			},
 			{
 				path: '/schedules',
 				element: <Schedules />
