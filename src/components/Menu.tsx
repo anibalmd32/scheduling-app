@@ -18,9 +18,7 @@ function Menu ({
 					<li key={index}>
 						<NavLink
 							to={item.path}
-							onClick={() => {
-								window.innerWidth < 768 ? toggle() : null;
-							}}
+							onClick={toggle}
 							className={({ isActive }) =>
 								[
 									isActive ? 'bg-blue-950 text-white' : 'text-blue-50',

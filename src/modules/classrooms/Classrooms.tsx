@@ -19,7 +19,7 @@ function Classrooms() {
 		<ClassroomProvider>
 			<section className='mt-8'>
 				<div className='mb-8'>
-					<h1 className='text-4xl font-semibold text-blue-950'>
+					<h1 className='text-3xl text-blue-950 font-bold mb-4'>
 						Aulas
 					</h1>
 					<Button label='Agregar aula' type='button' variant='info' onClick={handleOpenForm} />
