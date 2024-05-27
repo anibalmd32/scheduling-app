@@ -12,7 +12,7 @@ function Layout () {
 	return (
 		<main className='overflow-x-hidden'>
 			<Topbar handleOpen={handleOpen} isOpen={isOpen} />
-			<Menu isOpen={isOpen} items={navigation} />
+			<Menu isOpen={isOpen} items={navigation} toggle={handleOpen} />
 			<PageContainer isOpen={isOpen} />
 		</main>
 	);

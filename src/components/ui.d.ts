@@ -86,6 +86,7 @@ export interface MenuItemProps {
 export interface MenuProps {
 	items: MenuItemProps[];
 	isOpen: boolean;
+	toggle: () => void;
 }
 
 // * FORM

@@ -4,7 +4,8 @@ import { MenuProps } from './ui';
 
 function Menu ({
 	items,
-	isOpen
+	isOpen,
+	toggle
 }: MenuProps) {
 	return (
 		<aside className={`
@@ -17,7 +18,15 @@ function Menu ({
 					<li key={index}>
 						<NavLink
 							to={item.path}
-							className='flex justify-start gap-4 items-center p-2 pl-4 rounded-2xl hover:bg-blue-950 transition-all duration-300 text-md'
+							onClick={() => {
+								window.innerWidth < 768 ? toggle() : null;
+							}}
+							className={({ isActive }) =>
+								[
+									isActive ? 'bg-blue-950 text-white' : 'text-blue-50',
+									'flex justify-start gap-4 items-center p-2 pl-4 rounded-2xl hover:bg-blue-950 transition-all duration-300 text-md'
+								].join(' ')
+							}
 						>
 							<span className='hidden md:inline-block'>
 								{createElement(item.icon)}
