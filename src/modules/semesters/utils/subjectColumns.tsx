@@ -21,31 +21,80 @@ function renderSubjectCell<T>({
 		{
 			column: 'Horas teóricas',
 			render(cell) {
-				return (
-					<>
-						{cell.theoryHours}
-					</>
-				);
+				if (cell.theoryHours !== 0) {
+					const hourArray = String(cell.theoryHours).split('.');
+					const hours = hourArray[0];
+					let minutes = hourArray[1];
+	
+					if ( minutes && minutes.length === 1) {
+						minutes = `${minutes}0`;
+					}
+
+					return (
+						<>
+							{`${hours} h - ${minutes ?? '00'} min`}
+						</>
+					);
+				} else {
+					return (
+						<>
+							{cell.theoryHours} h
+						</>
+					);
+				}
+
 			},
 		},
 		{
 			column: 'Horas prácticas',
 			render(cell) {
-				return (
-					<>
-						{cell.practiceHours}
-					</>
-				);
+				if (cell.practiceHours !== 0) {
+					const hourArray = String(cell.practiceHours).split('.');
+					const hours = hourArray[0];
+					let minutes = hourArray[1];
+	
+					if ( minutes && minutes.length === 1) {
+						minutes = `${minutes}0`;
+					}
+
+					return (
+						<>
+							{`${hours} h - ${minutes ?? '00'} min`}
+						</>
+					);
+				} else {
+					return (
+						<>
+							{cell.practiceHours} h
+						</>
+					);
+				}
 			},
 		},
 		{
 			column: 'Horas de laboratorio',
 			render(cell) {
-				return (
-					<>
-						{cell.laboratoryHours}
-					</>
-				);
+				if (cell.laboratoryHours !== 0) {
+					const hourArray = String(cell.laboratoryHours).split('.');
+					const hours = hourArray[0];
+					let minutes = hourArray[1];
+	
+					if ( minutes && minutes.length === 1) {
+						minutes = `${minutes}0`;
+					}
+
+					return (
+						<>
+							{`${hours} h - ${minutes ?? '00'} min`}
+						</>
+					);
+				} else {
+					return (
+						<>
+							{cell.laboratoryHours} h
+						</>
+					);
+				}
 			},
 		},
 		{
