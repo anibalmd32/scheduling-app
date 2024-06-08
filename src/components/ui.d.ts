@@ -127,6 +127,11 @@ export interface ToastProps {
 	isLoader?: boolean;
 }
 
+// Generate schedule
+export interface GenerateScheduleConfig {
+	disabled: boolean;
+	onClick: () => void;
+}
 // * CALLENDAR
 export interface CallendarProps {
 	events: EventSourceInput;
@@ -136,6 +141,7 @@ export interface CallendarProps {
 	handleChangeEvent: (args: EventChangeArg) => void;
 	onAddEvent: (args: EventAddArg) => void;
 	onDeletEvent: (args: EventRemoveArg) => void;
+	generate?: GenerateScheduleConfig;
 	interactive?: boolean;
 	selectable?: boolean;
 	forPint?: boolean;

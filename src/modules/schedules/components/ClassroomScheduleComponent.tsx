@@ -8,6 +8,8 @@ import Spinner from '../../../components/Spinner';
 import { ScheduleForm } from './SchduleForm';
 import { ScheduleDetails } from './ScheduleDetails';
 
+import useGenerate from '../hooks/useGenerate';
+
 export const ClassroomScheduleComponent = () => {
 	const {
 		classroomSchduleEvents,
@@ -23,6 +25,8 @@ export const ClassroomScheduleComponent = () => {
 		onDeleteSubject,
 		openModal,
 	} = useClassroomSchdule();
+
+	const { disabled, handleGenerate } = useGenerate(classroomSelectValue);
 
 	const handlerPrint = async () => {
 		try {
@@ -61,6 +65,7 @@ export const ClassroomScheduleComponent = () => {
 					selectable
 					interactive
 					onExport={handlerPrint}
+					generate={{ disabled, onClick: handleGenerate}}
 				/>
 			</div>
 

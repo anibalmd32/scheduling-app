@@ -16,6 +16,7 @@ export default function Callendar({
 	selectable,
 	forPint,
 	onExport,
+	generate
 }: CallendarProps) {
 	
 	// Condicionalmente incluir interactionPlugin
@@ -26,14 +27,28 @@ export default function Callendar({
 
 	return (
 		<div>
-			{!forPint && (
-				<Button
-					label='Exportar a PDF'
-					type='button'
-					variant='info'
-					onClick={onExport}
-				/>
-			)}
+			<div className='flex gap-4'>
+				{!forPint && (
+					<Button
+						label='Exportar a PDF'
+						type='button'
+						variant='info'
+						onClick={onExport}
+					/>
+				)}
+
+				{
+					generate && (
+						<Button
+							label='Generar horario'
+							type='button'
+							variant='info'
+							disabled={generate.disabled}
+							onClick={generate.onClick}
+						/>
+					)
+				}
+			</div>
 
 			<div id='myCalendar'>
 				<FullCalendar
