@@ -214,7 +214,6 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 	};
 
 	const onSubmit = async (formData: AddToClassroomValues) => {
-		console.log(formData);
 		if (semesterData && formData.semester) {
 			const semester = semesterData.find(semester => semester._id === formData.semester);
 			const classroom = classroomData?.find(classroom => classroom._id === classroomSelectValue);

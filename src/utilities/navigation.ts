@@ -5,6 +5,7 @@ import { GrScheduleNew } from 'react-icons/gr';
 import { SiGoogleclassroom } from 'react-icons/si';
 import { FaChalkboardTeacher } from 'react-icons/fa';
 import { PiNotebookFill } from 'react-icons/pi';
+import { FaWandMagicSparkles } from 'react-icons/fa6';
 
 const navigation: MenuItemProps[] = [
 	{
@@ -16,6 +17,11 @@ const navigation: MenuItemProps[] = [
 		icon: GrScheduleNew,
 		label: 'Horarios',
 		path: '/schedules'
+	},
+	{
+		icon: FaWandMagicSparkles,
+		label: 'Generar horario',
+		path: '/generate'
 	},
 	{
 		icon: SiGoogleclassroom,

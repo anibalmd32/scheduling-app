@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import HTTPService from '../../../http.service';
 
 const service = new HTTPService('schedules');
@@ -18,10 +18,6 @@ function useGenerate(classroomId: string) {
 			console.error('Ocurrio un error al generar el horario', error);
 		}
 	};
-
-	useEffect(() => {
-		console.log('Cargando', classroomId);
-	}, [classroomId]);
 
 	return {
 		disabled,

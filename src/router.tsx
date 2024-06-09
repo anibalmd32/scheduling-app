@@ -8,6 +8,7 @@ import Classrooms from './modules/classrooms/Classrooms';
 import Professors from './modules/professors/Professors';
 import Semesters from './modules/semesters/Semester';
 import PrintSchedule from './modules/print/PrintSchedule';
+import Generate from './modules/generate/Generate';
 
 const router = createBrowserRouter([
 	{
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
 			{
 				path: '/schedules',
 				element: <Schedules />
+			},
+			{
+				path: '/generate',
+				element: <Generate />
 			},
 			{
 				path: '/classrooms',

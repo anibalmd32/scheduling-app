@@ -16,7 +16,6 @@ export default function Callendar({
 	selectable,
 	forPint,
 	onExport,
-	generate
 }: CallendarProps) {
 	
 	// Condicionalmente incluir interactionPlugin
@@ -36,18 +35,6 @@ export default function Callendar({
 						onClick={onExport}
 					/>
 				)}
-
-				{
-					generate && (
-						<Button
-							label='Generar horario'
-							type='button'
-							variant='info'
-							disabled={generate.disabled}
-							onClick={generate.onClick}
-						/>
-					)
-				}
 			</div>
 
 			<div id='myCalendar'>

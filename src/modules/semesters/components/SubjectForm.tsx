@@ -38,7 +38,7 @@ function SubjectForm({
 					value={formData.name}
 					label='Nombre'
 				/>
-				{/* <Input
+				<Input
 					name='theoryHours'
 					onChange={handleChange}
 					placeholder=''
@@ -61,7 +61,7 @@ function SubjectForm({
 					type='number'
 					value={formData.laboratoryHours}
 					label='Horas de Laboratorio'
-				/> */}
+				/>
 
 				<div className='flex gap-4 mt-4'>
 					<Button
