@@ -1,9 +1,10 @@
 // * HOOKS
-import React from 'react';
+import React, { useState } from 'react';
 import useData from '../../../hooks/useData';
 import useForm from '../../../hooks/useForm';
 
 // * LIBS
+import { AxiosError } from 'axios';
 import * as endpointLib from '../libs/endpoint-lib';
 import * as mapSelectItems from '../libs/maped-select-items-lib';
 
@@ -71,7 +72,14 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 		forAdd: false,
 		forDetails: false
 	});
+	const [toast, setToast] = React.useState({
+		loading: false,
+		success: false,
+		error: false
+	});
+	const [error, setError] = useState('');
 	const [selectedSubject, setSelectedSubject] = React.useState<string>();
+	const [loadingScheduleEvents, setLoadingScheduleEvents] = React.useState(true);
 
 	// * STATES FOR CALLENDAR COMPONENT
 	const [argsFormDelete, setArgsFormDelete] = React.useState<EventClickArg>();
@@ -104,13 +112,13 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 
 	const loadClassroomScheduleEvents = async () => {
 		try {
-			if (classroomSelectValue) {
-				const events = await getSchedulesForClassroom(classroomSelectValue);
-				setClassroomScheduleEvents(events);
-			}
+			const events = await getSchedulesForClassroom(classroomSelectValue);
+			setClassroomScheduleEvents(events);
 		} catch (error) {
 			console.error('Ocurrio un error al obtener los horarios de los salones', error);
-		}		
+		} finally {
+			setLoadingScheduleEvents(false);
+		}
 	}; // Get Spesific schedule events by classroom
 
 	// * VIEW HANDLERS
@@ -169,11 +177,34 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 			hours
 		};
 
+		setToast({
+			...toast,
+			loading: true,
+			success: false,
+			error: false
+		});
+
 		try {
 			const schedule = await updateSchedule(args.event.id, dataToSend);
 			setClassroomScheduleEvents([...classroomSchduleEvents, schedule]);
+
+			setToast({
+				...toast,
+				loading: false,
+				success: true,
+				error: false
+			});
 		} catch (error) {
-			console.error('Ocurrio un error al actualizar el horario', error);
+			if (error instanceof AxiosError) {
+				setToast({
+					...toast,
+					loading: false,
+					success: false,
+					error: true
+				});
+
+				setError(error.response?.data?.error);
+			}
 		}
 	};
 
@@ -193,11 +224,33 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 			typeSubject: currentEvent?.type
 		};
 
+		setToast({
+			...toast,
+			loading: true,
+			success: false,
+			error: false
+		});
 		try {
 			await deleteSchedule(args.event.id, dataToSend);
 			setClassroomScheduleEvents(classroomSchduleEvents.filter(event => event.id !== args.event.id));
+
+			setToast({
+				...toast,
+				loading: false,
+				success: true,
+				error: false
+			});
 		} catch (error) {
-			console.error('Ocurrio un error al eliminar el horario', error);
+			if (error instanceof AxiosError) {
+				setToast({
+					...toast,
+					loading: false,
+					success: false,
+					error: true
+				});
+
+				setError(error.response?.data?.error);
+			}
 		}
 	};
 
@@ -237,14 +290,37 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 					hours: newEventData.hours
 				};
 
+				setToast({
+					...toast,
+					loading: true,
+					success: false,
+					error: false
+				});
+
 				try {
 					const schedule = await createScheduleFromClassroom(newSchedule);
 					setClassroomScheduleEvents([...classroomSchduleEvents, schedule]);
 					setOpenModal({ ...openModal, forAdd: false });
 					resetForm();
 					setSubjectItems([]);
+
+					setToast({
+						...toast,
+						loading: false,
+						success: true,
+						error: false
+					});
 				} catch (error) {
-					console.error('Ocurrio un error al crear el horario', error);
+					if (error instanceof AxiosError) {
+						setToast({
+							...toast,
+							loading: false,
+							success: false,
+							error: true
+						});
+
+						setError(error.response?.data?.error);
+					}
 				}
 			}
 			
@@ -268,8 +344,16 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 	}, [semesterData]); // Set semester select items on load semester data
 
 	React.useEffect(() => {
-		loadClassroomScheduleEvents();
-	}, [classroomSelectValue]); // Load schedule data on select classroom
+		if (loadingScheduleEvents && classroomData) {
+
+			if (classroomSelectValue) {
+				setClassroomSelectValue(classroomSelectValue);
+			} else {
+				setClassroomSelectValue(classroomData[0]._id);
+			}
+			loadClassroomScheduleEvents();
+		}
+	}, [classroomSelectValue, loadingScheduleEvents]); // Load schedule data on select classroom
 
 	return (
 		<ClassroomScheduleContext.Provider value={{
@@ -300,7 +384,11 @@ export const ClassroomScheduleContextProvider = ({ children }: { children: React
 			handleSelectSemester,
 			onSubmit,
 			selectedSubject,
-			argsFormDelete
+			argsFormDelete,
+			toast,
+			error,
+			loadingScheduleEvents,
+			setLoadingScheduleEvents
 		}}>
 			{children}
 		</ClassroomScheduleContext.Provider>

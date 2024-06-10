@@ -1,6 +1,7 @@
 import React from 'react';
 import useData from '../../../hooks/useData';
 import useForm from '../../../hooks/useForm';
+import { AxiosError } from 'axios';
 import { createProfessor, updateProfessor, deleteProfessor, asignProfessorSubject } from '../services/professorsService';
 import { ProfessorsCtx, Professors, ProfessorFormValues } from '../def';
 
@@ -15,6 +16,7 @@ export const ProfessorsContextProvider = ({ children }: { children: React.ReactN
 		success: false,
 		error: false
 	});
+	const [error, setError] = React.useState('');
 	const [formValues, setFormValues] = React.useState<ProfessorFormValues>({
 		firstName: '',
 		lastName: '',
@@ -104,16 +106,21 @@ export const ProfessorsContextProvider = ({ children }: { children: React.ReactN
 				error: false
 			});
 			loadData();
-			handleOpenSubjectModal();
+			
 		} catch (error) {
-			setShowToast({
-				...showToast,
-				loading: false,
-				success: false,
-				error: true
-			});
+			if (error instanceof AxiosError) {
+				setShowToast({
+					...showToast,
+					loading: false,
+					success: false,
+					error: true
+				});
+
+				setError(error.response?.data?.error);
+			}
 		} finally {
 			setProfessorId('');
+			handleOpenSubjectModal();
 		}
 	};
 
@@ -189,7 +196,8 @@ export const ProfessorsContextProvider = ({ children }: { children: React.ReactN
 			handleOpenSubjectModal,
 			handleAsignSubject,
 			setProfessorId,
-			showToast
+			showToast,
+			error
 		}}>
 			{children}
 		</ProfessorsContext.Provider>

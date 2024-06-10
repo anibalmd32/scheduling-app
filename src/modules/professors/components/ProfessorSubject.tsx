@@ -48,11 +48,6 @@ export default function ProfessorSubject({ open, close, handleAsignSubject }: {
 		}
 	}, [scheduleEvents]);
 
-	const handleSelect = (item: string) => {
-		setSelectedItem(item);
-	};
-
-
 	return (
 		<Modal open={open} onClose={() => {
 			close();
@@ -64,7 +59,7 @@ export default function ProfessorSubject({ open, close, handleAsignSubject }: {
 					label='Seleccione una materia para asignar a este profesor'
 					name='subject'
 					onChange={(e) => {
-						handleSelect(e.target.value);
+						setSelectedItem(e.target.value);
 					}}
 					value={selectedItem}
 				/> : (

@@ -4,7 +4,8 @@ import { useClassroomSchdule } from '../Contexts/ClassroomSchedulesCtx';
 // * COMPONENTS
 import Callendar from '../../../components/Callendar';
 import Select from '../../../components/Select';
-import Spinner from '../../../components/Spinner';
+import { ClipLoader } from 'react-spinners';
+import Toast from '../../../components/Toast';
 import { ScheduleForm } from './SchduleForm';
 import { ScheduleDetails } from './ScheduleDetails';
 
@@ -24,6 +25,10 @@ export const ClassroomScheduleComponent = () => {
 		onAddSubject,
 		onDeleteSubject,
 		openModal,
+		toast,
+		error,
+		loadingScheduleEvents,
+		setLoadingScheduleEvents
 	} = useClassroomSchdule();
 
 	const { disabled, handleGenerate } = useGenerate(classroomSelectValue);
@@ -40,7 +45,7 @@ export const ClassroomScheduleComponent = () => {
 	};
 
 	if (isLoading) {
-		return <Spinner size={200} />;
+		return <ClipLoader size={80} />;
 	}
 	
 	return (
@@ -50,29 +55,64 @@ export const ClassroomScheduleComponent = () => {
 				items={classroomSelectItems}
 				label="Lista de salones"
 				name="classrooms"
-				onChange={e => handleClassroomSelect(e.target.value)}
+				onChange={e => {
+					handleClassroomSelect(e.target.value);
+					setLoadingScheduleEvents(true);
+				}}
 				value={classroomSelectValue}
 			/>
 
 			<div className='mt-4'>
-				<Callendar
-					events={classroomSchduleEvents}
-					handleChangeEvent={handleChangeSubject}
-					handleClickEvent={handleClickSubject}
-					handleInputEvent={handleInputSubject}
-					onAddEvent={onAddSubject}
-					onDeletEvent={onDeleteSubject}
-					selectable
-					interactive
-					onExport={handlerPrint}
-					generate={{ disabled, onClick: handleGenerate}}
-				/>
+				{
+					loadingScheduleEvents ? (
+						<div className='flex justify-center items-center h-full w-full'>
+							<ClipLoader size={80} />
+						</div>
+					) : (
+						<Callendar
+							events={classroomSchduleEvents}
+							handleChangeEvent={handleChangeSubject}
+							handleClickEvent={handleClickSubject}
+							handleInputEvent={handleInputSubject}
+							onAddEvent={onAddSubject}
+							onDeletEvent={onDeleteSubject}
+							selectable
+							interactive
+							onExport={handlerPrint}
+							generate={{ disabled, onClick: handleGenerate}}
+						/>	
+					)
+				}
 			</div>
 
 			<ScheduleForm
 				open={openModal.forAdd}
 				toggle={() => handleOpenModal('add')}
 			/>
+
+			{toast.loading && (
+				<Toast
+					message='Cargando'
+					variant='info'
+					isLoader
+				/>
+			)}
+
+			{toast.success && (
+				<Toast
+					message='Exito en la operacion'
+					variant='success'
+					duraction={3000}
+				/>
+			)}
+
+			{toast.error && (
+				<Toast
+					message={error}
+					variant='error'
+					duraction={3000}
+				/>
+			)}	
 		</>
 	);
 };

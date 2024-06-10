@@ -27,7 +27,8 @@ export default function ProfessorsTable() {
 		handleAsignSubject,
 		setProfessorId,
 		isLoading,
-		showToast
+		showToast,
+		error
 	} = useProfessors();
 
 	const columns: RenderCell<Professors>[] = [
@@ -146,7 +147,7 @@ export default function ProfessorsTable() {
 
 			{showToast.error && (
 				<Toast
-					message='Error en la operacion'
+					message={error}
 					variant='error'
 					duraction={3000}
 				/>

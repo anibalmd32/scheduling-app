@@ -62,6 +62,16 @@ export const ScheduleForm = ({ open, toggle }: Props) => {
 					)
 				}
 
+				{/* <Select
+					items={[]}
+					label='Asignar a un profesor'
+					name='professor'
+					onChange={e => {
+						handleChange(e);
+					}}
+					value={''}
+				/> */}
+
 				<div className='mt-4 flex gap-2'>
 					<Button
 						label='Enviar'

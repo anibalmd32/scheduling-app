@@ -88,6 +88,14 @@ export interface ClassroomScheduleCtx {
   onSubmit: (formData: AddToClassroomValues) => Promise<void>
   selectedSubject: string | undefined
   argsFormDelete: EventClickArg | undefined
+  toast: {
+    loading: boolean;
+    success: boolean;
+    error: boolean;
+  }
+  error: string
+  loadingScheduleEvents: boolean
+  setLoadingScheduleEvents: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 // * LIBS

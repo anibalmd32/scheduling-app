@@ -40,5 +40,6 @@ export interface ProfessorsCtx {
 		success: boolean;
 		error: boolean;
 	}
+	error: string
 }
 
