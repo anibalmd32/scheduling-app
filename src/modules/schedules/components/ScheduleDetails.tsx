@@ -5,7 +5,6 @@ import Modal from '../../../components/Modal';
 import { useClassroomSchdule } from '../Contexts/ClassroomSchedulesCtx';
 import Button from '../../../components/Button';
 import { subjectMetadataIndex } from '../utils/subjectMetadataIndex';
-import Select from '../../../components/Select';
 
 export const ScheduleDetails = () => {
 	const [details, setDetails] = React.useState<ScheduleEvent>();

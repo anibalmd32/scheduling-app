@@ -6,6 +6,8 @@ const service = new HTTPService('schedules');
 function useGenerate(classroomId: string) {
 	const [disabled, setDisabled] = useState(false);
 
+	console.log('classroomId', classroomId);
+
 	const handleGenerate = async () => {
 		try {
 			await service.httpCaller({
